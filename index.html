@@ -1,0 +1,2308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seay Wellness – First Visit Examination</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0B1F3A;
+    --blue: #1A4B8C;
+    --mid: #2E6BC4;
+    --accent: #4A9FD4;
+    --gold: #C9A84C;
+    --light: #EEF4FB;
+    --surface: #F7FAFE;
+    --white: #FFFFFF;
+    --text: #1A2B3C;
+    --muted: #5A7090;
+    --border: #C8D9EC;
+    --green: #1A6E3C;
+    --green-bg: #EAF5EF;
+    --orange: #B55A00;
+    --orange-bg: #FFF3E6;
+    --red: #9B2020;
+    --red-bg: #FDF0F0;
+    --input-bg: #FDFEFF;
+    --radius: 8px;
+    --shadow: 0 2px 12px rgba(11,31,58,0.10);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    background: var(--navy);
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+  }
+  .logo-block { display: flex; flex-direction: column; }
+  .logo-name { font-family: 'Playfair Display', serif; font-size: 20px; color: var(--white); letter-spacing: 0.5px; }
+  .logo-sub { font-size: 11px; color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; font-weight: 500; }
+  .header-actions { display: flex; gap: 10px; }
+
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 9px 20px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .btn-outline { background: transparent; border: 1.5px solid var(--accent); color: var(--accent); }
+  .btn-outline:hover { background: var(--accent); color: var(--white); }
+  .btn-gold { background: var(--gold); color: var(--navy); }
+  .btn-gold:hover { background: #B8903C; }
+  .btn-blue { background: var(--mid); color: var(--white); }
+  .btn-blue:hover { background: var(--blue); }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 980px; margin: 0 auto; padding: 32px 24px 64px; }
+
+  /* ── PATIENT INFO ── */
+  .patient-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 32px;
+    margin-bottom: 28px;
+    box-shadow: var(--shadow);
+  }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--navy);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-title .step-badge {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.8px;
+  }
+  .time-badge {
+    margin-left: auto;
+    background: var(--light);
+    color: var(--blue);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 12px;
+    border-radius: 20px;
+  }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .form-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+  .form-grid.four { grid-template-columns: 1fr 1fr 1fr 1fr; }
+  .form-full { grid-column: 1/-1; }
+
+  .field { display: flex; flex-direction: column; gap: 4px; }
+  .field label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+  .field input, .field textarea, .field select {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    padding: 9px 12px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--input-bg);
+    color: var(--text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(74,159,212,0.12);
+  }
+  .field textarea { resize: vertical; min-height: 70px; }
+
+  /* ── TEST SECTIONS ── */
+  .test-section {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .test-header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 100%);
+    padding: 16px 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    user-select: none;
+  }
+  .test-header:hover { filter: brightness(1.08); }
+  .test-num {
+    background: rgba(255,255,255,0.15);
+    color: var(--white);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .test-title-block { flex: 1; }
+  .test-title { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--white); }
+  .test-subtitle { font-size: 11px; color: rgba(255,255,255,0.65); letter-spacing: 0.5px; margin-top: 1px; }
+  .test-time { font-family: 'DM Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.7); margin-left: auto; }
+  .chevron { color: rgba(255,255,255,0.7); font-size: 16px; transition: transform 0.3s; margin-left: 8px; }
+  .test-section.collapsed .chevron { transform: rotate(-90deg); }
+  .test-body { padding: 22px 24px; display: block; }
+  .test-section.collapsed .test-body { display: none; }
+
+  .purpose-box {
+    background: var(--light);
+    border-left: 3px solid var(--accent);
+    padding: 12px 16px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    margin-bottom: 18px;
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+    line-height: 1.6;
+  }
+  .purpose-box strong { color: var(--blue); font-style: normal; }
+
+  .alert-box {
+    padding: 12px 16px;
+    border-radius: var(--radius);
+    margin-bottom: 18px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .alert-red { background: var(--red-bg); border: 1.5px solid #E8BABA; color: var(--red); }
+  .alert-orange { background: var(--orange-bg); border: 1.5px solid #F0D0A0; color: var(--orange); }
+  .alert-green { background: var(--green-bg); border: 1.5px solid #AADDC2; color: var(--green); }
+
+  /* ── PRE/POST TABLE ── */
+  .prepost-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 14px;
+    font-size: 13px;
+  }
+  .prepost-table th {
+    background: var(--navy);
+    color: var(--white);
+    padding: 9px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+  }
+  .prepost-table th:first-child { border-radius: 6px 0 0 0; }
+  .prepost-table th:last-child { border-radius: 0 6px 0 0; }
+  .prepost-table td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  .prepost-table tr:last-child td { border-bottom: none; }
+  .prepost-table tr:nth-child(even) td { background: var(--light); }
+  .prepost-table input[type="text"], .prepost-table input[type="number"] {
+    width: 100%;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    padding: 6px 8px;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    background: var(--input-bg);
+    color: var(--text);
+    outline: none;
+  }
+  .prepost-table input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px rgba(74,159,212,0.12);
+  }
+  .col-label { font-weight: 600; color: var(--navy); white-space: nowrap; }
+  .col-pre { background: #FFF9EC; }
+  .col-post { background: #EAF5EF; }
+  .pre-head { background: #B8860B !important; }
+  .post-head { background: #1A6E3C !important; }
+
+  /* ── RADIO/CHECKBOX GROUPS ── */
+  .radio-group, .check-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .radio-group label, .check-group label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--text);
+    cursor: pointer;
+    padding: 6px 12px;
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    transition: all 0.15s;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .radio-group label:hover, .check-group label:hover { border-color: var(--accent); background: var(--light); }
+  .radio-group input, .check-group input { accent-color: var(--blue); }
+
+  /* ── MW3 SQUAT OBSERVATIONS ── */
+  .observation-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .obs-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--input-bg);
+    font-size: 13px;
+    transition: all 0.15s;
+  }
+  .obs-item:has(input:checked) {
+    border-color: var(--red);
+    background: var(--red-bg);
+    color: var(--red);
+  }
+  .obs-item input { accent-color: var(--red); }
+
+  /* ── ROM INPUTS ── */
+  .rom-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 10px; }
+  .rom-cell {
+    background: var(--light);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px;
+    text-align: center;
+  }
+  .rom-cell .rom-label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 6px; }
+  .rom-cell input {
+    font-family: 'DM Mono', monospace;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--navy);
+    width: 70px;
+    text-align: center;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    padding: 4px 6px;
+    background: var(--white);
+    outline: none;
+  }
+  .rom-cell input:focus { border-color: var(--accent); }
+  .rom-cell .rom-unit { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  /* ── FINDINGS/NOTES ── */
+  .findings-row { margin-top: 16px; }
+  .findings-label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+  .findings-row textarea {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    padding: 10px 12px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--input-bg);
+    color: var(--text);
+    width: 100%;
+    min-height: 60px;
+    resize: vertical;
+    outline: none;
+  }
+  .findings-row textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(74,159,212,0.10); }
+
+  /* ── DIVIDER ── */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 28px 0 20px;
+  }
+  .section-divider-line { flex: 1; height: 1.5px; background: var(--border); }
+  .section-divider-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    color: var(--muted);
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── CARE PLAN ── */
+  .plan-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-top: 14px; }
+  .plan-card {
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .plan-card:hover { border-color: var(--accent); }
+  .plan-card.selected { border-color: var(--blue); background: var(--light); }
+  .plan-card-title { font-weight: 700; font-size: 14px; color: var(--navy); margin-bottom: 4px; }
+  .plan-card-detail { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  /* ── PRINT — SHARED ── */
+  @media print {
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    .site-header { position: relative; box-shadow: none; }
+    .header-actions { display: none !important; }
+    .chevron { display: none !important; }
+    .time-badge { display: none !important; }
+    .step-badge { display: none !important; }
+    .purpose-box { display: none !important; }
+    .alert-box { display: none !important; }
+    .btn { display: none !important; }
+    .container { padding: 0; max-width: 100%; }
+    body { font-size: 12px; background: white; }
+    .page-footer { display: none !important; }
+    .complete-dot { display: none !important; }
+    .section-divider { margin: 12px 0; }
+
+    /* Expand all sections when printing */
+    .test-section.collapsed .test-body { display: block !important; }
+
+    /* Hide empty inputs, textareas, unchecked radios/checkboxes */
+    .field input[type="text"]:placeholder-shown,
+    .field input[type="number"]:placeholder-shown { display: none; }
+    .field input[type="text"]:placeholder-shown + *,
+    .field textarea:placeholder-shown { display: none; }
+
+    /* Hide radio/checkbox groups with nothing checked */
+    .radio-group:not(:has(input:checked)),
+    .check-group:not(:has(input:checked)) { display: none !important; }
+
+    /* Hide unchecked radio/checkbox options — show only checked */
+    .radio-group label:has(input:not(:checked)),
+    .check-group label:has(input:not(:checked)) { display: none !important; }
+
+    /* Hide empty textareas */
+    textarea:placeholder-shown { display: none !important; }
+
+    /* Hide fields where input AND textarea are both empty/hidden */
+    .field:not(:has(input:not([value=""]):not(:placeholder-shown))):not(:has(textarea:not(:placeholder-shown))):not(:has(input:checked)) { display: none !important; }
+
+    /* Hide form-grid rows if all children hidden */
+    .form-grid:not(:has(.field:not([style*="display: none"]))):empty { display: none !important; }
+
+    /* observation items — hide unchecked */
+    .obs-item:not(:has(input:checked)) { display: none !important; }
+    .observation-grid:not(:has(input:checked)) { display: none !important; }
+
+    /* ROM cells — hide empty */
+    .rom-cell:has(input:placeholder-shown) { display: none !important; }
+    .rom-grid:not(:has(input:not(:placeholder-shown))) { display: none !important; }
+
+    /* Prepost table — hide rows where all inputs are empty */
+    .prepost-table tbody tr:not(:has(input:not(:placeholder-shown))) { display: none !important; }
+
+    /* Muscle table — hide rows with nothing checked and no note */
+    #muscle-table-body tr:not(:has(input:checked)):not(:has(input[id$="-note"]:not(:placeholder-shown))) { display: none !important; }
+
+    /* Hide entire test sections that have nothing filled */
+    .test-section:not(:has(input:checked)):not(:has(input:not(:placeholder-shown))):not(:has(textarea:not(:placeholder-shown))) { display: none !important; }
+
+    /* Plan cards — hide unselected */
+    .plan-card:not(.selected) { display: none !important; }
+    .plan-cards { display: block !important; }
+
+    /* Print typography */
+    .test-header { page-break-inside: avoid; }
+    .test-section { page-break-inside: avoid; margin-bottom: 12px; }
+    .patient-card { page-break-inside: avoid; }
+  }
+
+  /* ── PRINT MODE: PATIENT HANDOUT ── */
+  body.print-handout .narrative-section { display: none !important; }
+  body.print-handout .consequences-panel { display: block !important; }
+  body.print-handout .consequences-panel:not(.open) .consequences-body { display: none !important; }
+  @media print {
+    body.print-handout #narrative-card { display: none !important; }
+    body.print-handout .section-divider:last-of-type { display: none !important; }
+    body.print-handout .consequences-panel { display: block !important; }
+    body.print-handout .consequences-panel.open .consequences-body { display: block !important; }
+    body.print-handout .consequences-panel:not(.open) .consequences-body { display: none !important; }
+    body.print-handout .consequences-toggle-icon { display: none; }
+  }
+
+  /* ── PRINT MODE: PROVIDER NOTES ── */
+  @media print {
+    body.print-provider .consequences-panel { display: none !important; }
+    body.print-provider #narrative-card { display: block !important; }
+    body.print-provider .narrative-section { display: block !important; }
+  }
+
+  /* ── COMPLETED INDICATOR ── */
+  .consequences-panel {
+    margin-top: 16px;
+    border: 1.5px solid #D4A843;
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .consequences-toggle {
+    background: linear-gradient(135deg, #7A5C1E 0%, #B8860B 100%);
+    padding: 10px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    user-select: none;
+  }
+  .consequences-toggle:hover { filter: brightness(1.1); }
+  .consequences-toggle-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #FFF8E7;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    flex: 1;
+  }
+  .consequences-toggle-icon { color: #FFF8E7; font-size: 14px; transition: transform 0.3s; }
+  .consequences-panel.open .consequences-toggle-icon { transform: rotate(180deg); }
+  .consequences-body {
+    display: none;
+    background: #FFFBF0;
+    padding: 14px 16px;
+  }
+  .consequences-panel.open .consequences-body { display: block; }
+  .consequences-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .consequences-col-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1.5px solid;
+  }
+  .consequences-col-title.causes { color: #7A3B00; border-color: #E8A060; }
+  .consequences-col-title.consequences { color: #7A0000; border-color: #E88080; }
+  .consequences-list { list-style: none; padding: 0; margin: 0; }
+  .consequences-list li {
+    font-size: 12px;
+    color: #3A2800;
+    padding: 3px 0 3px 16px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .consequences-list li::before { content: '▸'; position: absolute; left: 0; color: #B8860B; }
+  .consequences-list.red li::before { color: #C0392B; }
+
+  /* ── COMPLETED INDICATOR ── */
+  .complete-dot {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: #C8D9EC;
+    margin-left: 8px;
+    transition: background 0.3s;
+    flex-shrink: 0;
+  }
+  .complete-dot.done { background: #2CB76A; }
+
+  /* ── FOOTER ── */
+  .page-footer {
+    margin-top: 40px;
+    padding: 20px 32px;
+    background: var(--navy);
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgba(255,255,255,0.6);
+    font-size: 12px;
+  }
+  .page-footer strong { color: var(--white); }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo-block">
+    <div class="logo-name">Seay Wellness</div>
+    <div class="logo-sub">First Visit Examination</div>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-outline" onclick="expandAll()">Expand All</button>
+    <button class="btn btn-outline" onclick="collapseAll()">Collapse All</button>
+    <button class="btn btn-outline" onclick="toggleAllConsequences()" id="conseq-toggle-btn">▶ Show Clinical Significance</button>
+    <button class="btn btn-blue" onclick="clearForm()">Clear Form</button>
+    <button class="btn btn-gold" onclick="printHandout()" title="Clean handout for patient — shows only filled data and clinical significance if toggled open">🖨 Print Patient Handout</button>
+    <button class="btn" style="background:#1A6E3C;color:white;" onclick="printProviderNotes()" title="Full provider notes with SOAP narrative">📋 Save Provider Notes</button>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ─────────────── PATIENT INFO ─────────────── -->
+  <div class="patient-card">
+    <div class="card-title">
+      <span class="step-badge">PATIENT</span>
+      Patient Information
+      <span class="time-badge">0 – 5 min</span>
+    </div>
+    <div class="form-grid">
+      <div class="field"><label>Patient Name</label><input type="text" id="pt-name" placeholder="First Last"></div>
+      <div class="field"><label>Date of Birth</label><input type="text" id="pt-dob" placeholder="MM/DD/YYYY"></div>
+      <div class="field"><label>Exam Date</label><input type="text" id="pt-date" placeholder="MM/DD/YYYY"></div>
+      <div class="field"><label>Re-Exam Date</label><input type="text" id="pt-redate" placeholder="MM/DD/YYYY"></div>
+    </div>
+    <div class="form-grid" style="margin-top:12px;">
+      <div class="field"><label>Age</label><input type="text" id="pt-age" placeholder="Age"></div>
+      <div class="field">
+        <label>Sex</label>
+        <div class="radio-group" style="margin-top:6px;">
+          <label><input type="radio" name="sex" value="M"> Male</label>
+          <label><input type="radio" name="sex" value="F"> Female</label>
+        </div>
+      </div>
+      <div class="field"><label>Total Body Weight (lbs)</label><input type="text" id="pt-weight" placeholder="lbs"></div>
+      <div class="field"><label>Height</label><input type="text" id="pt-height" placeholder="ft / in"></div>
+    </div>
+    <div class="form-grid" style="margin-top:12px;">
+      <div class="field form-full"><label>Chief Complaint</label><input type="text" id="pt-complaint" placeholder="Primary reason for visit, duration, onset"></div>
+    </div>
+    <div class="form-grid" style="margin-top:10px;">
+      <div class="field form-full"><label>Health Goals / Patient's Own Words</label><textarea id="pt-goals" placeholder="What does the patient want to achieve from care?"></textarea></div>
+    </div>
+    <div class="form-grid three" style="margin-top:10px;">
+      <div class="field"><label>Prior Chiropractic Care?</label>
+        <div class="radio-group" style="margin-top:6px;">
+          <label><input type="radio" name="prior-chiro" value="Y"> Yes</label>
+          <label><input type="radio" name="prior-chiro" value="N"> No</label>
+        </div>
+      </div>
+      <div class="field"><label>Prior Surgeries / Fractures</label><input type="text" placeholder="List if applicable"></div>
+      <div class="field"><label>Current Medications</label><input type="text" placeholder="List if applicable"></div>
+    </div>
+    <!-- Vitals -->
+    <div style="margin-top:16px; padding:14px 16px; background:var(--light); border-radius:var(--radius); border:1.5px solid var(--border);">
+      <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px;">Vitals</div>
+      <div class="form-grid four">
+        <div class="field"><label>Blood Pressure</label><input type="text" id="vit-bp" placeholder="e.g. 122/78"></div>
+        <div class="field"><label>Pulse (bpm)</label><input type="text" id="vit-pulse" placeholder="e.g. 72"></div>
+        <div class="field"><label>Pulse Quality</label>
+          <div class="radio-group" style="margin-top:6px;">
+            <label><input type="radio" name="pulse-quality" value="Regular"> Regular</label>
+            <label><input type="radio" name="pulse-quality" value="Irregular"> Irregular</label>
+          </div>
+        </div>
+        <div class="field"><label>BP Classification</label>
+          <div class="radio-group" style="margin-top:6px;">
+            <label><input type="radio" name="bp-class" value="Normal"> Normal</label>
+            <label><input type="radio" name="bp-class" value="Elevated"> Elevated</label>
+            <label><input type="radio" name="bp-class" value="High"> High</label>
+            <label><input type="radio" name="bp-class" value="Low"> Low</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-grid" style="margin-top:10px;">
+      <div class="field form-full"><label>Red Flags / Contraindications Noted</label><textarea id="pt-redflags" placeholder="Vascular, neurological, fracture risk, cancer hx, osteoporosis, blood thinners, etc." style="min-height:50px;"></textarea></div>
+    </div>
+  </div>
+
+  <!-- ─────────────── POSTURAL OBSERVATION ─────────────── -->
+  <div class="test-section" id="s-posture">
+    <div class="test-header" onclick="toggleSection('s-posture')">
+      <div class="test-num">1</div>
+      <div class="test-title-block">
+        <div class="test-title">Postural Observation</div>
+        <div class="test-subtitle">Narrate aloud while observing — patient education in real time</div>
+      </div>
+      <div class="test-time">5 – 10 min</div>
+      <div class="complete-dot" id="dot-posture"></div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="test-body">
+      <div class="alert-box alert-orange">Stand patient at posture grid or wall. Narrate every finding out loud as you observe — this is patient education happening in real time before a single test is done.</div>
+      <div class="form-grid" style="margin-top:4px;">
+        <div class="field"><label>Head Position</label>
+          <div class="radio-group">
+            <label><input type="radio" name="head" value="Normal"> WNL</label>
+            <label><input type="radio" name="head" value="AHC"> Anterior Head Carriage</label>
+            <label><input type="radio" name="head" value="R-Lateral"> R Lateral Tilt</label>
+            <label><input type="radio" name="head" value="L-Lateral"> L Lateral Tilt</label>
+          </div>
+        </div>
+        <div class="field"><label>Shoulder Level</label>
+          <div class="radio-group">
+            <label><input type="radio" name="shoulder-level" value="Even"> Even</label>
+            <label><input type="radio" name="shoulder-level" value="R-high"> R High</label>
+            <label><input type="radio" name="shoulder-level" value="L-high"> L High</label>
+          </div>
+        </div>
+        <div class="field"><label>Shoulder Position (Sagittal)</label>
+          <div class="radio-group">
+            <label><input type="radio" name="shoulder-sag" value="Normal"> Normal</label>
+            <label><input type="radio" name="shoulder-sag" value="Rounded"> Rounded Forward</label>
+            <label><input type="radio" name="shoulder-sag" value="Upper-cross"> Upper Cross Pattern</label>
+          </div>
+        </div>
+        <div class="field"><label>Hip / Pelvis Level</label>
+          <div class="radio-group">
+            <label><input type="radio" name="hip-level" value="Even"> Even</label>
+            <label><input type="radio" name="hip-level" value="R-high"> R High</label>
+            <label><input type="radio" name="hip-level" value="L-high"> L High</label>
+          </div>
+        </div>
+        <div class="field"><label>Lumbar Curve</label>
+          <div class="radio-group">
+            <label><input type="radio" name="lumbar" value="Normal"> Normal</label>
+            <label><input type="radio" name="lumbar" value="Hyper"> Hyperlordosis</label>
+            <label><input type="radio" name="lumbar" value="Flat"> Flattened</label>
+            <label><input type="radio" name="lumbar" value="Kyphosis"> Kyphosis</label>
+          </div>
+        </div>
+        <div class="field"><label>Knee / Foot</label>
+          <div class="check-group">
+            <label><input type="checkbox"> Knee Valgus</label>
+            <label><input type="checkbox"> Pronated Feet</label>
+            <label><input type="checkbox"> External Foot Flare</label>
+            <label><input type="checkbox"> Knee Recurvatum</label>
+          </div>
+        </div>
+      </div>
+      <div class="findings-row"><div class="findings-label">Postural Notes</div><textarea placeholder="Describe postural distortions, weight shift, overall presentation..."></textarea></div>
+    </div>
+  </div>
+
+  <!-- ─────────────── TESTABILITY & SWITCHING ─────────────── -->
+  <div class="test-section" id="s-testability">
+    <div class="test-header" onclick="toggleSection('s-testability')">
+      <div class="test-num">2</div>
+      <div class="test-title-block">
+        <div class="test-title">FIT — Testability & Switching</div>
+        <div class="test-subtitle">Must be performed FIRST — prerequisite for all FIT findings</div>
+      </div>
+      <div class="test-time">~30 sec</div>
+      <div class="complete-dot" id="dot-testability"></div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="test-body">
+      <div class="alert-box alert-red">⚠ Always perform this FIRST on every new patient. If testability or switching is off, all subsequent FIT exam findings may be false positives or may not appear at all due to continuous disruption to the nervous system, meridian system, and muscle sequences. Correct with Erchonia laser before proceeding.</div>
+      <div class="purpose-box"><strong>Purpose (FIT Documentation):</strong> When evaluating a patient, specific physiological patterns should respond predictably if cells communicate correctly. Testing the polarity point (glabella) for testability and the K-27 points for switching identifies whether the body is in a "false positive" state that would invalidate all other exam findings.</div>
+      <div class="form-grid">
+        <div class="field"><label>#1 Testability (Glabella / Polarity Point)</label>
+          <div class="radio-group">
+            <label><input type="radio" name="test1" value="OK"> OK</label>
+            <label><input type="radio" name="test1" value="NeedCorrection"> Needs Correction</label>
+          </div>
+        </div>
+        <div class="field"><label>#1 Testability — Area of Involvement</label><input type="text" placeholder="Note region if correction needed"></div>
+        <div class="field"><label>#2 Switching (K-27 Points)</label>
+          <div class="radio-group">
+            <label><input type="radio" name="test2" value="OK"> OK</label>
+            <label><input type="radio" name="test2" value="NeedCorrection"> Needs Correction</label>
+          </div>
+        </div>
+        <div class="field"><label>#2 Switching — Area of Involvement</label><input type="text" placeholder="Note region if correction needed"></div>
+      </div>
+      <div class="findings-row"><div class="findings-label">Correction Applied</div><textarea placeholder="Method used (Erchonia laser, adjustment, etc.) and result..." style="min-height:48px;"></textarea></div>
+    </div>
+  </div>
+
+  <!-- ─────────────── BILATERAL SCALES ─────────────── -->
+  <div class="test-section" id="s-scales">
+    <div class="test-header" onclick="toggleSection('s-scales')">
+      <div class="test-num">3</div>
+      <div class="test-title-block">
+        <div class="test-title">FIT — Bilateral Scales</div>
+        <div class="test-subtitle">Weight Bearing — Ideal Neutral Posture</div>
+      </div>
+      <div class="test-time">~2 min</div>
+      <div class="complete-dot" id="dot-scales"></div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="test-body">
+      <div class="purpose-box"><strong>Purpose (FIT Documentation):</strong> Standing on separate scales has been used as a functional posture exam for a long time and remains effective for simple clinical insight. Patient stands one foot on each scale where they claim to be balanced. Photograph both scales simultaneously — do not wait for numbers to stop flickering. This entire test takes 20–30 seconds.</div>
+      <div class="form-grid four" style="margin-top:4px;">
+        <div class="field">
+          <label>Right Foot — PRE (lbs)</label>
+          <input type="text" placeholder="lbs">
+        </div>
+        <div class="field">
+          <label>Left Foot — PRE (lbs)</label>
+          <input type="text" placeholder="lbs">
+        </div>
+        <div class="field">
+          <label>Right Foot — POST (lbs)</label>
+          <input type="text" placeholder="lbs">
+        </div>
+        <div class="field">
+          <label>Left Foot — POST (lbs)</label>
+          <input type="text" placeholder="lbs">
+        </div>
+      </div>
+      <div class="findings-row"><div class="findings-label">Clinical Notes</div><textarea placeholder="Note R vs. L difference, pre vs. post change after adjustment..." style="min-height:50px;"></textarea></div>
+    </div>
+  </div>
+
+  <!-- ─────────────── BRAIN / CORTEX ─────────────── -->
+  <div class="test-section" id="s-brain">
+    <div class="test-header" onclick="toggleSection('s-brain')">
+      <div class="test-num">4</div>
+      <div class="test-title-block">
+        <div class="test-title">FIT — Brain / Cortex</div>
+        <div class="test-subtitle">Hum (Right Cortex) — Count (Left Cortex)</div>
+      </div>
+      <div class="test-time">~1 min</div>
+      <div class="complete-dot" id="dot-brain"></div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="test-body">
+      <div class="purpose-box"><strong>Purpose (FIT Documentation):</strong> Humming challenges the right cortex; counting challenges the left cortex. A previously strong arm should remain strong during each activity. If the arm goes weak, it indicates that cortex cannot keep up with the demands placed on it. Combined with other FIT findings, this provides a deeper understanding of neurological imbalances in the Brain/Body Map.</div>
+      <div class="form-grid">
+        <div class="field"><label>Hum (Right Cortex)</label>
+          <div class="radio-group">
+            <label><input type="radio" name="hum" value="Strong"> Arm Stays Strong</label>
+            <label><input type="radio" name="hum" value="Weak"> Arm Goes Weak</label>
+          </div>
+        </div>
+        <div class="field"><label>Count (Left Cortex)</label>
+          <div class="radio-group">
+            <label><input type="radio" name="count" value="Strong"> Arm Stays Strong</label>
+            <label><input type="radio" name="count" value="Weak"> Arm Goes Weak</label>
+          </div>
+        </div>
+      </div>
+      <div class="findings-row"><div class="findings-label">Notes</div><textarea placeholder="Which cortex appeared deficient, patient response, combination with other FIT findings..." style="min-height:48px;"></textarea></div>
+    </div>
+  </div>
+
+  <!-- ─────────────── CEREBELLUM / ROMBERG ─────────────── -->
+  <div class="test-section" id="s-cerebellum">
+    <div class="test-header" onclick="toggleSection('s-cerebellum')">
+      <div class="test-num">5</div>
+      <div class="test-title-block">
+        <div class="test-title">FIT — Cerebellum / Progressive Balance</div>
+        <div class="test-subtitle">Romberg → Airex Pad → March in Place → Sobriety Test</div>
+      </div>
+      <div class="test-time">~2 min</div>
+      <div class="complete-dot" id="dot-cerebellum"></div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="test-body">
+      <div class="purpose-box"><strong>Purpose (FIT Documentation):</strong> With eyes open, three sensory systems — vision, proprioception, and vestibular sense — provide input to the cerebellum to maintain trunk and body stability. Removing visual input (eyes closed) reveals vestibular or proprioceptive system lesions. A midline cerebellar lesion causing truncal instability will produce instability even with eyes open. The progressive difficulty of this test maps cerebellar function systematically.</div>
+      <table class="prepost-table">
+        <thead>
+          <tr>
+            <th style="width:36%;">Test Variation</th>
+            <th class="pre-head" style="width:16%;">Sway R (PRE)</th>
+            <th class="pre-head" style="width:16%;">Sway L (PRE)</th>
+            <th class="post-head" style="width:16%;">Sway R (POST)</th>
+            <th class="post-head" style="width:16%;">Sway L (POST)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-label">Romberg Standard (Eyes Closed)</td>
+            <td class="col-pre"><input type="text" placeholder="in / cm"></td>
+            <td class="col-pre"><input type="text" placeholder="in / cm"></td>
+            <td class="col-post"><input type="text" placeholder="in / cm"></td>
+            <td class="col-post"><input type="text" placeholder="in / cm"></td>
+          </tr>
+          <tr>
+            <td class="col-label">Add March in Place</td>
+            <td class="col-pre"><input type="text" placeholder="in / cm"></td>
+            <td class="col-pre"><input type="text" placeholder="in / cm"></td>
+            <td class="col-post"><input type="text" placeholder="in / cm"></td>
+            <td class="col-post"><input type="text" placeholder="in / cm"></td>
+          </tr>
+          <tr>
+            <td class="col-label">Romberg on Airex Balance Pad</td>
+            <td class="col-pre"><input type="text" placeholder="in / cm"></td>
+            <td class="col-pre"><input type="text" placeholder="in / cm"></td>
+            <td class="col-post"><input type="text" placeholder="in / cm"></td>
+            <td class="col-post"><input type="text" placeholder="in / cm"></td>
+          </tr>
+          <tr>
+            <td class="col-label">Sobriety Test (Eyes Open — heel toe, straight line)</td>
+            <td class="col-pre"><input type="text" placeholder="Pass / Fail"></td>
+            <td class="col-pre"><input type="text" placeholder="—"></td>
+            <td class="col-post"><input type="text" placeholder="Pass / Fail"></td>
+            <td class="col-post"><input type="text" placeholder="—"></td>
+          </tr>
+          <tr>
+            <td class="col-label">Sobriety Test — Eyes Closed</td>
+            <td class="col-pre"><input type="text" placeholder="Pass / Fail"></td>
+            <td class="col-pre"><input type="text" placeholder="—"></td>
+            <td class="col-post"><input type="text" placeholder="Pass / Fail"></td>
+            <td class="col-post"><input type="text" placeholder="—"></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="findings-row"><div class="findings-label">Clinical Notes</div><textarea placeholder="Describe sway direction, loss of balance, patient observation, comparison pre vs. post..."></textarea></div>
+    </div>
+  </div>
+
+  <!-- ─────────────── JAMAR GRIP ─────────────── -->
+  <div class="test-section" id="s-grip">
+    <div class="test-header" onclick="toggleSection('s-grip')">
+      <div class="test-num">6</div>
+      <div class="test-title-block">
+        <div class="test-title">FIT — JAMAR Grip Test</div>
+        <div class="test-subtitle">5 Grip Positions — Bilateral — Seated at 90°</div>
+      </div>
+      <div class="test-time">~2 min</div>
+      <div class="complete-dot" id="dot-grip"></div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="test-body">
+      <div class="purpose-box"><strong>Purpose (FIT Documentation):</strong> Grip strength has been shown in numerous long-term PubMed studies to predict current and future health status throughout the lifespan, including susceptibility to common chronic degenerative diseases. The JAMAR has been the medical standard for decades and allows comparison of the patient to age/gender norms and right to left side. It is included in FIT Level 1 because it is the established standard of care, though FIT recognizes its limitation as a static measure with no training application.</div>
+      <div class="form-grid four" style="margin-bottom:14px;">
+        <div class="field"><label>JAMAR Grip Position</label><input type="text" placeholder="1 – 5"></div>
+        <div class="field"><label>Elbow Position</label><input type="text" placeholder="90° Flexed"></div>
+        <div class="field"><label>Dominant Hand</label>
+          <div class="radio-group" style="margin-top:6px;">
+            <label><input type="radio" name="dom" value="R"> Right</label>
+            <label><input type="radio" name="dom" value="L"> Left</label>
+          </div>
+        </div>
+        <div class="field"><label>Position</label>
+          <div class="radio-group" style="margin-top:6px;">
+            <label><input type="radio" name="position" value="Seated"> Seated</label>
+            <label><input type="radio" name="position" value="Standing"> Standing</label>
+          </div>
+        </div>
+      </div>
+      <table class="prepost-table">
+        <thead>
+          <tr>
+            <th style="width:24%;">Position</th>
+            <th class="pre-head">Right (PRE)</th>
+            <th class="pre-head">Left (PRE)</th>
+            <th class="post-head">Right (POST)</th>
+            <th class="post-head">Left (POST)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="col-label">Position 1</td><td class="col-pre"><input type="text" placeholder="lbs"></td><td class="col-pre"><input type="text" placeholder="lbs"></td><td class="col-post"><input type="text" placeholder="lbs"></td><td class="col-post"><input type="text" placeholder="lbs"></td></tr>
+          <tr><td class="col-label">Position 2</td><td class="col-pre"><input type="text" placeholder="lbs"></td><td class="col-pre"><input type="text" placeholder="lbs"></td><td class="col-post"><input type="text" placeholder="lbs"></td><td class="col-post"><input type="text" placeholder="lbs"></td></tr>
+          <tr><td class="col-label">Position 3</td><td class="col-pre"><input type="text" placeholder="lbs"></td><td class="col-pre"><input type="text" placeholder="lbs"></td><td class="col-post"><input type="text" placeholder="lbs"></td><td class="col-post"><input type="text" placeholder="lbs"></td></tr>
+          <tr><td class="col-label">Position 4</td><td class="col-pre"><input type="text" placeholder="lbs"></td><td class="col-pre"><input type="text" placeholder="lbs"></td><td class="col-post"><input type="text" placeholder="lbs"></td><td class="col-post"><input type="text" placeholder="lbs"></td></tr>
+          <tr><td class="col-label">Position 5</td><td class="col-pre"><input type="text" placeholder="lbs"></td><td class="col-pre"><input type="text" placeholder="lbs"></td><td class="col-post"><input type="text" placeholder="lbs"></td><td class="col-post"><input type="text" placeholder="lbs"></td></tr>
+        </tbody>
+      </table>
+      <div class="findings-row"><div class="findings-label">Clinical Notes / Asymmetry</div><textarea placeholder="Note R vs L difference, age/gender comparison, patient reaction to results, pre vs. post change..."></textarea></div>
+    </div>
+  </div>
+
+  <!-- ─────────────── BAND EXTENSIONS ─────────────── -->
+  <div class="test-section" id="s-bands">
+    <div class="test-header" onclick="toggleSection('s-bands')">
+      <div class="test-num">7</div>
+      <div class="test-title-block">
+        <div class="test-title">FIT — Band Extensions (Single Arm)</div>
+        <div class="test-subtitle">Right Arm Active / Left Stabilized — then switch</div>
+      </div>
+      <div class="test-time">~3 min</div>
+      <div class="complete-dot" id="dot-bands"></div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="test-body">
+      <div class="purpose-box"><strong>Purpose (FIT Documentation):</strong> Band Extensions may identify unknown imbalances in the nervous system and/or musculature contributing to anatomical distortion of the neck and shoulder area. Voluntary motion of the active arm involves the same-side cerebellum and opposite-side parietal lobe. Stabilization involves the same-side parietal lobe. Side-to-side asymmetry in this test reveals neurological imbalances that contribute to Upper Cross Syndrome patterns, and is part of the 3D Brain/Body Map.</div>
+      <div class="form-grid four" style="margin-bottom:14px;">
+        <div class="field"><label>Band Size Used</label><input type="text" placeholder="Light / Medium / Heavy"></div>
+        <div class="field"><label>Hand Width</label><input type="text" placeholder="Shoulder width"></div>
+        <div class="field"><label>Position</label>
+          <div class="radio-group" style="margin-top:6px;">
+            <label><input type="radio" name="band-pos" value="Lying"> Lying Down</label>
+            <label><input type="radio" name="band-pos" value="Standing"> Standing</label>
+          </div>
+        </div>
+      </div>
+      <table class="prepost-table">
+        <thead>
+          <tr>
+            <th style="width:28%;">Hand Position</th>
+            <th class="pre-head" style="width:11%;">R Active PRE</th>
+            <th class="pre-head" style="width:11%;">L Stabilized PRE</th>
+            <th class="pre-head" style="width:7%;">Reps PRE</th>
+            <th class="post-head" style="width:11%;">R Active POST</th>
+            <th class="post-head" style="width:11%;">L Stabilized POST</th>
+            <th class="post-head" style="width:7%;">Reps POST</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-label">Palm Down</td>
+            <td class="col-pre"><input type="text" placeholder="Diff 1-5"></td>
+            <td class="col-pre"><input type="text" placeholder="Diff 1-5"></td>
+            <td class="col-pre"><input type="text" placeholder="#"></td>
+            <td class="col-post"><input type="text" placeholder="Diff 1-5"></td>
+            <td class="col-post"><input type="text" placeholder="Diff 1-5"></td>
+            <td class="col-post"><input type="text" placeholder="#"></td>
+          </tr>
+          <tr>
+            <td class="col-label">Palm Up</td>
+            <td class="col-pre"><input type="text" placeholder="Diff 1-5"></td>
+            <td class="col-pre"><input type="text" placeholder="Diff 1-5"></td>
+            <td class="col-pre"><input type="text" placeholder="#"></td>
+            <td class="col-post"><input type="text" placeholder="Diff 1-5"></td>
+            <td class="col-post"><input type="text" placeholder="Diff 1-5"></td>
+            <td class="col-post"><input type="text" placeholder="#"></td>
+          </tr>
+          <tr>
+            <td class="col-label">Palm In (Thumb Up)</td>
+            <td class="col-pre"><input type="text" placeholder="Diff 1-5"></td>
+            <td class="col-pre"><input type="text" placeholder="Diff 1-5"></td>
+            <td class="col-pre"><input type="text" placeholder="#"></td>
+            <td class="col-post"><input type="text" placeholder="Diff 1-5"></td>
+            <td class="col-post"><input type="text" placeholder="Diff 1-5"></td>
+            <td class="col-post"><input type="text" placeholder="#"></td>
+          </tr>
+          <tr>
+            <td class="col-label">Palm In (Thumb Down)</td>
+            <td class="col-pre"><input type="text" placeholder="Diff 1-5"></td>
+            <td class="col-pre"><input type="text" placeholder="Diff 1-5"></td>
+            <td class="col-pre"><input type="text" placeholder="#"></td>
+            <td class="col-post"><input type="text" placeholder="Diff 1-5"></td>
+            <td class="col-post"><input type="text" placeholder="Diff 1-5"></td>
+            <td class="col-post"><input type="text" placeholder="#"></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="findings-row"><div class="findings-label">Pain Scale (1–10) / Clinical Notes</div><textarea placeholder="Note which side was weaker, which palm position showed most asymmetry, post-adjustment change..."></textarea></div>
+    </div>
+  </div>
+
+  <!-- DIVIDER -->
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <div class="section-divider-label">MoveWell3 Screen</div>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <!-- ─────────────── MW3 OVERHEAD SQUAT ─────────────── -->
+  <div class="test-section" id="s-squat">
+    <div class="test-header" onclick="toggleSection('s-squat')">
+      <div class="test-num">8</div>
+      <div class="test-title-block">
+        <div class="test-title">MW3 — Overhead Deep Squat</div>
+        <div class="test-subtitle">Level 1 Screen — Full kinetic chain assessment</div>
+      </div>
+      <div class="test-time">~3 min</div>
+      <div class="complete-dot" id="dot-squat"></div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="test-body">
+      <div class="purpose-box"><strong>Purpose (MoveWell3):</strong> The overhead squat maps the full kinetic chain in a single movement. Each compensation — arms dropping, shoulder elevation, anterior pelvic tilt, knee deviation, foot flattening — has a targeted corrective exercise protocol assigned to it. It is the most comprehensive single movement screen in the Level 1 battery.</div>
+      <p style="font-size:13px;font-weight:600;color:var(--navy);margin-bottom:8px;">Modified Squat 1 — Arms Down: Check all dysfunctions observed</p>
+      <div class="observation-grid">
+        <div class="obs-item"><input type="checkbox"> Arms Fall</div>
+        <div class="obs-item"><input type="checkbox"> Shoulders Elevate</div>
+        <div class="obs-item"><input type="checkbox"> Excessive Anterior Pelvic Tilt</div>
+        <div class="obs-item"><input type="checkbox"> Knees Deviate In (Valgus)</div>
+        <div class="obs-item"><input type="checkbox"> Knees Deviate Out (Varus)</div>
+        <div class="obs-item"><input type="checkbox"> Feet Flatten</div>
+        <div class="obs-item"><input type="checkbox"> Feet Turn Out Excessively</div>
+        <div class="obs-item"><input type="checkbox"> Excess Forward Lean</div>
+        <div class="obs-item"><input type="checkbox"> Asymmetric Weight Shift</div>
+        <div class="obs-item"><input type="checkbox"> Shoulder Girdle Elevates</div>
+      </div>
+      <p style="font-size:13px;font-weight:600;color:var(--navy);margin:14px 0 8px;">Modified Squat 2 — Heels Up (if applicable): Findings</p>
+      <div class="observation-grid">
+        <div class="obs-item"><input type="checkbox"> Same Findings (Upper Body Restriction)</div>
+        <div class="obs-item"><input type="checkbox"> Improved (Lower Body / Ankle Restriction)</div>
+        <div class="obs-item"><input type="checkbox"> Fully Functional with Heels Up</div>
+      </div>
+      <div class="form-grid" style="margin-top:14px;">
+        <div class="field"><label>Overall Squat Result</label>
+          <div class="radio-group">
+            <label><input type="radio" name="squat-result" value="Functional"> Functional</label>
+            <label><input type="radio" name="squat-result" value="Dysfunctional"> Dysfunctional</label>
+            <label><input type="radio" name="squat-result" value="Pain"> Pain Present</label>
+          </div>
+        </div>
+      </div>
+      <div class="findings-row"><div class="findings-label">Squat Notes / Priority Corrections</div><textarea placeholder="Dominant compensation patterns, which corrections are priorities, restriction likely upper vs. lower..."></textarea></div>
+    </div>
+  </div>
+
+  <!-- ─────────────── MW3 TOE TOUCH ─────────────── -->
+  <div class="test-section" id="s-toetouch">
+    <div class="test-header" onclick="toggleSection('s-toetouch')">
+      <div class="test-num">9</div>
+      <div class="test-title-block">
+        <div class="test-title">MW3 — Toe Touch & Overhead Extension</div>
+        <div class="test-subtitle">Posterior chain flexibility + thoracic mobility</div>
+      </div>
+      <div class="test-time">~2 min</div>
+      <div class="complete-dot" id="dot-toetouch"></div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="test-body">
+      <div class="form-grid">
+        <div class="field"><label>Toe Touch — Distance from Floor</label><input type="text" placeholder="inches from floor (or past floor)"></div>
+        <div class="field"><label>Toe Touch — Restriction Type</label>
+          <div class="radio-group">
+            <label><input type="radio" name="tt-type" value="Hamstring"> Hamstring</label>
+            <label><input type="radio" name="tt-type" value="Low Back"> Low Back</label>
+            <label><input type="radio" name="tt-type" value="Both"> Both</label>
+          </div>
+        </div>
+        <div class="field"><label>Toe Touch — Spinal Curve</label>
+          <div class="radio-group">
+            <label><input type="radio" name="tt-curve" value="Uniform"> Uniform</label>
+            <label><input type="radio" name="tt-curve" value="Non-uniform"> Non-uniform</label>
+          </div>
+        </div>
+        <div class="field"><label>Overhead Extension</label>
+          <div class="radio-group">
+            <label><input type="radio" name="oe" value="Functional"> Functional</label>
+            <label><input type="radio" name="oe" value="Limited"> Limited — Thoracic</label>
+            <label><input type="radio" name="oe" value="Pain"> Pain</label>
+          </div>
+        </div>
+      </div>
+      <div class="findings-row"><div class="findings-label">Notes</div><textarea placeholder="Pain location on toe touch, thoracic mobility notes, UL overhead extension comparison..." style="min-height:50px;"></textarea></div>
+    </div>
+  </div>
+
+  <!-- ─────────────── MW3 CERVICAL ROM ─────────────── -->
+  <div class="test-section" id="s-cervical">
+    <div class="test-header" onclick="toggleSection('s-cervical')">
+      <div class="test-num">10</div>
+      <div class="test-title-block">
+        <div class="test-title">MW3 / Chiro — Cervical Range of Motion</div>
+        <div class="test-subtitle">Active ROM all planes — bilateral comparison</div>
+      </div>
+      <div class="test-time">~1 min</div>
+      <div class="complete-dot" id="dot-cervical"></div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="test-body">
+      <div class="rom-grid">
+        <div class="rom-cell"><div class="rom-label">Flexion (50° N)</div><input type="text" placeholder="°"><div class="rom-unit">degrees</div></div>
+        <div class="rom-cell"><div class="rom-label">Extension (60° N)</div><input type="text" placeholder="°"><div class="rom-unit">degrees</div></div>
+        <div class="rom-cell"><div class="rom-label">R Rotation (80° N)</div><input type="text" placeholder="°"><div class="rom-unit">degrees</div></div>
+        <div class="rom-cell"><div class="rom-label">L Rotation (80° N)</div><input type="text" placeholder="°"><div class="rom-unit">degrees</div></div>
+        <div class="rom-cell"><div class="rom-label">R Lateral Flex (45° N)</div><input type="text" placeholder="°"><div class="rom-unit">degrees</div></div>
+        <div class="rom-cell"><div class="rom-label">L Lateral Flex (45° N)</div><input type="text" placeholder="°"><div class="rom-unit">degrees</div></div>
+      </div>
+      <div class="findings-row" style="margin-top:14px;"><div class="findings-label">Cervical Notes (pain, guarding, head forward compensation, end-feel)</div><textarea placeholder="Most restricted planes, pain provocation, head forward shift during motion..." style="min-height:50px;"></textarea></div>
+    </div>
+  </div>
+
+  <!-- ─────────────── MW3 SHOULDER TOUCH ─────────────── -->
+  <div class="test-section" id="s-shoulder">
+    <div class="test-header" onclick="toggleSection('s-shoulder')">
+      <div class="test-num">11</div>
+      <div class="test-title-block">
+        <div class="test-title">MW3 — Shoulder Touch</div>
+        <div class="test-subtitle">Bilateral shoulder mobility assessment</div>
+      </div>
+      <div class="test-time">~1 min</div>
+      <div class="complete-dot" id="dot-shoulder"></div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="test-body">
+      <div class="form-grid four">
+        <div class="field"><label>R Hand — Top (reaches over)</label>
+          <div class="radio-group"><label><input type="radio" name="sh-rt" value="Pass"> Pass</label><label><input type="radio" name="sh-rt" value="Fail"> Fail</label><label><input type="radio" name="sh-rt" value="Pain"> Pain</label></div>
+        </div>
+        <div class="field"><label>R Hand — Bottom (reaches behind)</label>
+          <div class="radio-group"><label><input type="radio" name="sh-rb" value="Pass"> Pass</label><label><input type="radio" name="sh-rb" value="Fail"> Fail</label><label><input type="radio" name="sh-rb" value="Pain"> Pain</label></div>
+        </div>
+        <div class="field"><label>L Hand — Top (reaches over)</label>
+          <div class="radio-group"><label><input type="radio" name="sh-lt" value="Pass"> Pass</label><label><input type="radio" name="sh-lt" value="Fail"> Fail</label><label><input type="radio" name="sh-lt" value="Pain"> Pain</label></div>
+        </div>
+        <div class="field"><label>L Hand — Bottom (reaches behind)</label>
+          <div class="radio-group"><label><input type="radio" name="sh-lb" value="Pass"> Pass</label><label><input type="radio" name="sh-lb" value="Fail"> Fail</label><label><input type="radio" name="sh-lb" value="Pain"> Pain</label></div>
+        </div>
+      </div>
+      <div class="findings-row"><div class="findings-label">Shoulder Notes</div><textarea placeholder="Asymmetry noted, pain location, distance between hands..." style="min-height:48px;"></textarea></div>
+    </div>
+  </div>
+
+  <!-- ─────────────── FABER / GLUTE BRIDGE ─────────────── -->
+  <div class="test-section" id="s-faber">
+    <div class="test-header" onclick="toggleSection('s-faber')">
+      <div class="test-num">12</div>
+      <div class="test-title-block">
+        <div class="test-title">MW3 — FABER & Glute Bridge</div>
+        <div class="test-subtitle">Hip / SI joint mobility + glute activation</div>
+      </div>
+      <div class="test-time">~2 min</div>
+      <div class="complete-dot" id="dot-faber"></div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="test-body">
+      <div class="form-grid">
+        <div class="field"><label>FABER — Right</label>
+          <div class="radio-group"><label><input type="radio" name="faber-r" value="Neg"> Negative</label><label><input type="radio" name="faber-r" value="Pos"> Positive</label></div>
+        </div>
+        <div class="field"><label>FABER — Left</label>
+          <div class="radio-group"><label><input type="radio" name="faber-l" value="Neg"> Negative</label><label><input type="radio" name="faber-l" value="Pos"> Positive</label></div>
+        </div>
+        <div class="field"><label>Unilateral Glute Bridge — Right</label>
+          <div class="radio-group"><label><input type="radio" name="gb-r" value="Functional"> Functional</label><label><input type="radio" name="gb-r" value="Weak"> Weak</label><label><input type="radio" name="gb-r" value="Pain"> Pain</label></div>
+        </div>
+        <div class="field"><label>Unilateral Glute Bridge — Left</label>
+          <div class="radio-group"><label><input type="radio" name="gb-l" value="Functional"> Functional</label><label><input type="radio" name="gb-l" value="Weak"> Weak</label><label><input type="radio" name="gb-l" value="Pain"> Pain</label></div>
+        </div>
+      </div>
+      <div class="findings-row"><div class="findings-label">Hip / SI Notes</div><textarea placeholder="Pain location on FABER, hip drop on glute bridge, thoracolumbar hyperextension compensations..." style="min-height:50px;"></textarea></div>
+    </div>
+  </div>
+
+  <!-- DIVIDER -->
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <div class="section-divider-label">Chiropractic Examination</div>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <!-- ─────────────── STANDING STRESS TEST ─────────────── -->
+  <div class="test-section" id="s-sst">
+    <div class="test-header" onclick="toggleSection('s-sst')">
+      <div class="test-num">13</div>
+      <div class="test-title-block">
+        <div class="test-title">FIT — Standing Stress Test (SI Ligament)</div>
+        <div class="test-subtitle">Serola Sacral Belt — Most missed joint in the body</div>
+      </div>
+      <div class="test-time">~1 min</div>
+      <div class="complete-dot" id="dot-sst"></div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="test-body">
+      <div class="purpose-box"><strong>Purpose (FIT Documentation):</strong> Used to identify if the person has a sprained SI ligament and if a Sacro-Iliac belt would benefit them. The sacroiliac ligament is the most weight-bearing and the largest ligament in the body. SI injuries are the most missed and mismanaged joint in the body. A positive test can affect not only low back but also carpal tunnel, the brain, shoulder, and plantar fasciitis. Note: instruct the patient to choose which leg to stand on first — they will intuitively stand on their stronger side.</div>
+      <div class="form-grid">
+        <div class="field"><label>Arm in the Clear (Baseline)</label>
+          <div class="radio-group"><label><input type="radio" name="sst-clear" value="Strong"> Strong</label><label><input type="radio" name="sst-clear" value="Weak"> Weak (find different muscle)</label></div>
+        </div>
+        <div class="field"><label>Stand on Right Leg — Retest Arm</label>
+          <div class="radio-group"><label><input type="radio" name="sst-r" value="Strong"> Stays Strong</label><label><input type="radio" name="sst-r" value="Weak"> Goes Weak (+SI Right)</label></div>
+        </div>
+        <div class="field"><label>Stand on Left Leg — Retest Arm</label>
+          <div class="radio-group"><label><input type="radio" name="sst-l" value="Strong"> Stays Strong</label><label><input type="radio" name="sst-l" value="Weak"> Goes Weak (+SI Left)</label></div>
+        </div>
+        <div class="field"><label>Sacrobelt Applied — Retest</label>
+          <div class="radio-group"><label><input type="radio" name="sst-belt" value="Strengthens"> Arm Strengthens (+SI Sprain)</label><label><input type="radio" name="sst-belt" value="Remains-Weak"> Remains Weak (realign belt / subluxation)</label><label><input type="radio" name="sst-belt" value="NA"> N/A</label></div>
+        </div>
+      </div>
+      <div class="findings-row"><div class="findings-label">SI Notes</div><textarea placeholder="Which side positive, patient's initial leg choice, sacrobelt response, connection to chief complaint..." style="min-height:50px;"></textarea></div>
+    </div>
+  </div>
+
+  <!-- ─────────────── SPINAL PALPATION ─────────────── -->
+  <div class="test-section" id="s-palp">
+    <div class="test-header" onclick="toggleSection('s-palp')">
+      <div class="test-num">14</div>
+      <div class="test-title-block">
+        <div class="test-title">Chiro — Spinal Palpation & Motion</div>
+        <div class="test-subtitle">Static & motion palpation — subluxation levels</div>
+      </div>
+      <div class="test-time">~2 min</div>
+      <div class="complete-dot" id="dot-palp"></div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="test-body">
+      <div class="form-grid three">
+        <div class="field"><label>Cervical Subluxation Levels</label><input type="text" id="sub-cerv" placeholder="e.g. C1, C5, C6"></div>
+        <div class="field"><label>Thoracic Subluxation Levels</label><input type="text" id="sub-thor" placeholder="e.g. T4, T6"></div>
+        <div class="field"><label>Lumbar / Pelvic Subluxation Levels</label><input type="text" id="sub-lumb" placeholder="e.g. L4, L5, Sacrum"></div>
+      </div>
+
+      <!-- Apparent Short Leg -->
+      <div style="margin-top:16px; padding:14px 16px; background:var(--light); border-radius:var(--radius); border:1.5px solid var(--border);">
+        <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px;">Apparent Short Leg (Prone / Supine)</div>
+        <div class="form-grid four">
+          <div class="field"><label>Apparent Short Leg</label>
+            <div class="radio-group">
+              <label><input type="radio" name="short-leg" value="Even"> Even</label>
+              <label><input type="radio" name="short-leg" value="Right"> Right Short</label>
+              <label><input type="radio" name="short-leg" value="Left"> Left Short</label>
+            </div>
+          </div>
+          <div class="field"><label>Estimated Difference</label><input type="text" id="short-leg-diff" placeholder="e.g. 1/4 inch"></div>
+          <div class="field"><label>Position Assessed</label>
+            <div class="radio-group">
+              <label><input type="radio" name="short-leg-pos" value="Prone"> Prone</label>
+              <label><input type="radio" name="short-leg-pos" value="Supine"> Supine</label>
+              <label><input type="radio" name="short-leg-pos" value="Both"> Both</label>
+            </div>
+          </div>
+          <div class="field"><label>Type</label>
+            <div class="radio-group">
+              <label><input type="radio" name="short-leg-type" value="Functional"> Functional</label>
+              <label><input type="radio" name="short-leg-type" value="Anatomical"> Anatomical</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Muscle Findings by Region -->
+      <div style="margin-top:16px;">
+        <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px;">Muscle / Soft Tissue Findings by Region</div>
+        <table class="prepost-table">
+          <thead>
+            <tr>
+              <th style="width:22%;">Region</th>
+              <th style="width:10%;">Side</th>
+              <th style="background:#2E4D6B !important;">Taut</th>
+              <th style="background:#2E4D6B !important;">Tender</th>
+              <th style="background:#2E4D6B !important;">Fibrotic</th>
+              <th style="background:#2E4D6B !important;">Edematous</th>
+              <th style="background:#2E4D6B !important;">Spasm</th>
+              <th style="background:#2E4D6B !important;">Atrophy</th>
+              <th style="width:20%;">Notes</th>
+            </tr>
+          </thead>
+          <tbody id="muscle-table-body">
+            <!-- rows injected by JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="form-grid" style="margin-top:14px;">
+        <div class="field"><label>Motion Palpation Findings</label><textarea id="motion-palp" placeholder="Fixed vs. hypermobile segments, directions restricted..." style="min-height:50px;"></textarea></div>
+        <div class="field"><label>Additional Palpation Notes</label><textarea id="palp-notes" placeholder="End-feel, joint play, other soft tissue findings..." style="min-height:50px;"></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─────────────── ORTHOPEDIC / NEUROLOGIC ─────────────── -->
+  <div class="test-section" id="s-ortho">
+    <div class="test-header" onclick="toggleSection('s-ortho')">
+      <div class="test-num">15</div>
+      <div class="test-title-block">
+        <div class="test-title">Chiro — Orthopedic & Neurological Tests</div>
+        <div class="test-subtitle">Complaint-specific — SLR, DTR, dermatomes + provocatives</div>
+      </div>
+      <div class="test-time">~3 min</div>
+      <div class="complete-dot" id="dot-ortho"></div>
+      <div class="chevron">▾</div>
+    </div>
+    <div class="test-body">
+      <div class="form-grid four">
+        <div class="field"><label>SLR — Right</label>
+          <div class="radio-group"><label><input type="radio" name="slr-r" value="Neg"> Neg</label><label><input type="radio" name="slr-r" value="Pos"> Pos</label></div>
+        </div>
+        <div class="field"><label>SLR — Left</label>
+          <div class="radio-group"><label><input type="radio" name="slr-l" value="Neg"> Neg</label><label><input type="radio" name="slr-l" value="Pos"> Pos</label></div>
+        </div>
+        <div class="field"><label>SLR R — Degrees</label><input type="text" placeholder="°"></div>
+        <div class="field"><label>SLR L — Degrees</label><input type="text" placeholder="°"></div>
+      </div>
+      <div class="form-grid three" style="margin-top:12px;">
+        <div class="field"><label>Orthopedic Test 1</label><input type="text" placeholder="Name of test"></div>
+        <div class="field"><label>Result</label>
+          <div class="radio-group"><label><input type="radio" name="ot1" value="Neg"> Neg</label><label><input type="radio" name="ot1" value="Pos"> Pos</label><label><input type="radio" name="ot1" value="Equivocal"> Equivocal</label></div>
+        </div>
+        <div class="field"><label>Notes</label><input type="text" placeholder="Symptom reproduction, side, degree..."></div>
+      </div>
+      <div class="form-grid three" style="margin-top:8px;">
+        <div class="field"><label>Orthopedic Test 2</label><input type="text" placeholder="Name of test"></div>
+        <div class="field"><label>Result</label>
+          <div class="radio-group"><label><input type="radio" name="ot2" value="Neg"> Neg</label><label><input type="radio" name="ot2" value="Pos"> Pos</label><label><input type="radio" name="ot2" value="Equivocal"> Equivocal</label></div>
+        </div>
+        <div class="field"><label>Notes</label><input type="text" placeholder="Symptom reproduction, side, degree..."></div>
+      </div>
+      <div class="form-grid three" style="margin-top:8px;">
+        <div class="field"><label>Orthopedic Test 3</label><input type="text" placeholder="Name of test"></div>
+        <div class="field"><label>Result</label>
+          <div class="radio-group"><label><input type="radio" name="ot3" value="Neg"> Neg</label><label><input type="radio" name="ot3" value="Pos"> Pos</label><label><input type="radio" name="ot3" value="Equivocal"> Equivocal</label></div>
+        </div>
+        <div class="field"><label>Notes</label><input type="text" placeholder="Symptom reproduction, side, degree..."></div>
+      </div>
+      <div class="form-grid" style="margin-top:12px;">
+        <div class="field"><label>DTR Findings</label><textarea placeholder="Patellar, Achilles, brachioradialis, biceps — grading 0-4+, side comparison..." style="min-height:50px;"></textarea></div>
+        <div class="field"><label>Dermatomal / Sensory</label><textarea placeholder="Light touch, numbness/tingling dermatomal distribution, if applicable..." style="min-height:50px;"></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DIVIDER -->
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <div class="section-divider-label">Clinical Summary & Care Plan</div>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <!-- ─────────────── CLINICAL IMPRESSION ─────────────── -->
+  <div class="patient-card">
+    <div class="card-title">
+      <span class="step-badge">ROF</span>
+      Clinical Impression & Diagnoses
+      <span class="time-badge">47 – 57 min</span>
+    </div>
+    <div class="form-grid">
+      <div class="field form-full"><label>Primary Diagnosis / Clinical Impression</label><textarea placeholder="Subluxation levels, functional movement deficits, neurological findings, muscle imbalance patterns identified..." style="min-height:70px;"></textarea></div>
+    </div>
+    <div class="form-grid three" style="margin-top:12px;">
+      <div class="field"><label>Diagnosis Code (ICD-10)</label><input type="text" placeholder="e.g. M54.5, M99.01"></div>
+      <div class="field"><label>Secondary Diagnosis</label><input type="text" placeholder="ICD-10 code"></div>
+      <div class="field"><label>Tertiary Diagnosis</label><input type="text" placeholder="ICD-10 code"></div>
+    </div>
+    <div class="form-grid" style="margin-top:12px;">
+      <div class="field form-full"><label>Most Impactful Pre/Post Changes to Share with Patient</label><textarea placeholder="What shifted on scales, grip change, balance improvement, ROM change — use these in your ROF narrative..." style="min-height:70px;"></textarea></div>
+    </div>
+  </div>
+
+  <!-- ─────────────── CARE PLAN ─────────────── -->
+  <div class="patient-card">
+    <div class="card-title">
+      <span class="step-badge">PLAN</span>
+      Recommended Care Plan
+    </div>
+    <div class="plan-cards">
+      <div class="plan-card" onclick="selectPlan(this, 'relief')" id="plan-relief">
+        <div class="plan-card-title">Relief Care</div>
+        <div class="plan-card-detail">Focus on reducing acute symptoms. Shorter initial frequency, goals around pain reduction and initial functional improvement.</div>
+      </div>
+      <div class="plan-card" onclick="selectPlan(this, 'correction')" id="plan-correction">
+        <div class="plan-card-title">Corrective Care</div>
+        <div class="plan-card-detail">Addresses root cause — structural correction, neurological re-patterning, movement rehabilitation. Longer commitment with measurable outcomes.</div>
+      </div>
+      <div class="plan-card" onclick="selectPlan(this, 'wellness')" id="plan-wellness">
+        <div class="plan-card-title">Wellness / Membership</div>
+        <div class="plan-card-detail">Maintenance and optimization after correction goals achieved. Ongoing monitoring of FIT markers, movement screen, and functional health.</div>
+      </div>
+    </div>
+    <div class="form-grid three" style="margin-top:16px;">
+      <div class="field"><label>Frequency (Per Week)</label><input type="text" placeholder="e.g. 3x/wk"></div>
+      <div class="field"><label>Duration</label><input type="text" placeholder="e.g. 8 weeks"></div>
+      <div class="field"><label>Re-Exam Scheduled</label><input type="text" placeholder="Date"></div>
+    </div>
+    <div class="form-grid" style="margin-top:12px;">
+      <div class="field form-full"><label>Plan Accepted By Patient</label>
+        <div class="radio-group">
+          <label><input type="radio" name="plan-accepted" value="Y"> Yes — Scheduled</label>
+          <label><input type="radio" name="plan-accepted" value="ThinkingAboutIt"> Thinking About It</label>
+          <label><input type="radio" name="plan-accepted" value="N"> Declined</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-grid" style="margin-top:10px;">
+      <div class="field form-full"><label>Provider Notes</label><textarea placeholder="Patient response to ROF, objections raised, follow-up actions, supplement recommendations..." style="min-height:70px;"></textarea></div>
+    </div>
+  </div>
+
+  <!-- DIVIDER -->
+  <div class="section-divider narrative-section">
+    <div class="section-divider-line"></div>
+    <div class="section-divider-label">Clinical Narrative</div>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <!-- ─────────────── NARRATIVE ─────────────── -->
+  <div class="patient-card narrative-section" id="narrative-card">
+    <div class="card-title">
+      <span class="step-badge">NARRATIVE</span>
+      Generated Clinical Narrative
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Click the button below to generate a clinical narrative from all entered exam data. You can edit the narrative directly after it is generated.</p>
+    <button class="btn btn-blue" onclick="generateNarrative()" style="margin-bottom:20px;font-size:14px;padding:11px 28px;">⚡ Generate Narrative from Exam Data</button>
+    <div id="narrative-output" style="display:none;">
+      <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;">Clinical Narrative — Edit as Needed</div>
+      <textarea id="narrative-text" style="font-family:'DM Mono',monospace;font-size:13px;line-height:1.9;padding:20px;border:1.5px solid var(--border);border-radius:var(--radius);background:#FAFCFF;color:var(--text);width:100%;min-height:600px;resize:vertical;outline:none;" spellcheck="true"></textarea>
+      <div style="display:flex;gap:10px;margin-top:12px;">
+        <button class="btn btn-gold" onclick="printProviderNotes()">Print / Save Provider Notes PDF</button>
+        <button class="btn btn-outline" onclick="copyNarrative()">Copy to Clipboard</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="page-footer">
+    <div><strong>Seay Wellness</strong> — Garner, NC — seaywellness.com</div>
+    <div>First Visit Examination Protocol · FIT Level 1 · MoveWell3 · Chiropractic</div>
+    <div>Patient: <strong id="footer-name">—</strong> · Date: <strong id="footer-date">—</strong></div>
+  </div>
+
+</div>
+
+<script>
+  // ══════════════════════════════════════════════════════
+  // CLINICAL CONSEQUENCES DATA
+  // ══════════════════════════════════════════════════════
+  const CONSEQUENCES = {
+    's-posture': {
+      label: 'Clinical Significance — Postural Deviations',
+      causes: [
+        'Anterior head carriage adds 10 lbs of load per inch to the cervical spine',
+        'Rounded shoulders compress the brachial plexus and thoracic outlet',
+        'Hyperlordosis shifts compressive load to lumbar facet joints',
+        'Pelvic unleveling creates asymmetric stress on SI joints and hips',
+        'Knee valgus increases medial compartment load and ACL/meniscus risk',
+      ],
+      consequences: [
+        'Accelerated cervical and lumbar disc degeneration',
+        'Chronic headaches, migraines, and TMJ dysfunction',
+        'Reduced lung capacity up to 30% with thoracic kyphosis',
+        'Early-onset hip, knee, and ankle arthritis from compensatory loading',
+        'Nerve compression, thoracic outlet syndrome, and radiculopathy',
+        'Progressive scoliotic adaptation if left uncorrected',
+      ]
+    },
+    's-scales': {
+      label: 'Clinical Significance — Bilateral Weight Asymmetry',
+      causes: [
+        'Sacral and pelvic misalignment creating uneven ground reaction forces',
+        'Neurological imbalance altering subconscious weight distribution',
+        'Functional leg length inequality shifting center of gravity',
+        'Muscle imbalance pulling pelvis laterally under load',
+      ],
+      consequences: [
+        'Accelerated unilateral degeneration of hip, knee, and ankle on loaded side',
+        'Progressive SI joint dysfunction and ligament stress',
+        'Compensatory scoliosis and lateral spinal curvature',
+        'Chronic low back and hip pain from asymmetric muscle fatigue',
+        'Increased fall risk from altered proprioceptive input',
+      ]
+    },
+    's-brain': {
+      label: 'Clinical Significance — Cortical Function',
+      causes: [
+        'Vertebral subluxation creating aberrant afferent input to the cortex',
+        'Chronic neurological stress depleting cortical reserve',
+        'Right/left cortical imbalance from asymmetric proprioceptive input',
+      ],
+      consequences: [
+        'Diminished motor control and coordination over time',
+        'Increased susceptibility to cognitive fatigue and brain fog',
+        'Impaired dual-tasking ability — increased fall risk',
+        'Neuroplastic maladaptation reinforcing dysfunction patterns',
+        'Autonomic dysregulation affecting organ function',
+      ]
+    },
+    's-cerebellum': {
+      label: 'Clinical Significance — Cerebellar / Balance Dysfunction',
+      causes: [
+        'Vestibular system stress from cervical subluxation and poor proprioception',
+        'Loss of cerebellar input due to restricted spinal motion',
+        'Reduced sensory integration from proprioceptive decline',
+      ],
+      consequences: [
+        'Falls are the leading cause of ER visits for adults over 45',
+        'Hip fractures in adults over 65 carry a 20–30% one-year mortality rate',
+        'Fear of falling creates activity restriction and accelerated deconditioning',
+        'Progressive cerebellar dysfunction and neurological decline',
+        'Loss of independent living due to inability to navigate safely',
+      ]
+    },
+    's-grip': {
+      label: 'Clinical Significance — Grip Strength',
+      causes: [
+        'Neurological compromise reducing motor unit recruitment',
+        'Cervical and thoracic subluxations affecting upper extremity nerve supply',
+        'Systemic muscle loss (sarcopenia) accelerated by inactivity',
+        'Asymmetry reflecting neurological imbalance between sides',
+      ],
+      consequences: [
+        'Grip strength is a stronger predictor of mortality than blood pressure (PURE study, Lancet, 140,000+ participants)',
+        'Low grip linked to increased cardiovascular events and all-cause mortality',
+        'Sarcopenia and frailty — accelerated functional decline after age 50',
+        'Increased risk of cognitive impairment and dementia',
+        'Progressive inability to perform ADLs — opening jars, carrying, self-care',
+        'Metabolic dysfunction: insulin resistance and type 2 diabetes risk',
+      ]
+    },
+    's-bands': {
+      label: 'Clinical Significance — Upper Extremity Neurological Asymmetry',
+      causes: [
+        'Cervical subluxation disrupting nerve supply to shoulder/arm musculature',
+        'Upper Cross Syndrome from forward head and rounded shoulder pattern',
+        'Parietal and cerebellar imbalance affecting voluntary motor control',
+      ],
+      consequences: [
+        'Progressive shoulder impingement and rotator cuff pathology',
+        'Chronic upper extremity tendinopathy from compensatory movement',
+        'Carpal tunnel and thoracic outlet syndrome if untreated',
+        'Reduced functional capacity for occupational and recreational tasks',
+        'Reinforcement of neurological asymmetry worsening over time',
+      ]
+    },
+    's-squat': {
+      label: 'Clinical Significance — Kinetic Chain Dysfunction',
+      causes: [
+        'Global movement compensation from spinal subluxation and muscle imbalance',
+        'Hip mobility restriction loading the lumbar spine during daily movement',
+        'Ankle restriction forcing the knee medially (valgus collapse)',
+        'Thoracic rigidity preventing proper overhead mobility',
+      ],
+      consequences: [
+        'ACL, meniscus, and patellar tendon injury from valgus collapse under load',
+        'Accelerated hip and knee osteoarthritis from abnormal joint loading',
+        'Chronic low back pain from lumbar compensation during lifting',
+        'Repetitive strain injuries from faulty movement patterns over thousands of reps',
+        'Progressive loss of functional independence for basic activities',
+      ]
+    },
+    's-toetouch': {
+      label: 'Clinical Significance — Posterior Chain Flexibility',
+      causes: [
+        'Chronic hamstring tightness from prolonged sitting and anterior pelvic tilt',
+        'Lumbar disc dysfunction limiting forward flexion',
+        'Posterior fascial chain restriction creating global mobility loss',
+      ],
+      consequences: [
+        'Persistent hamstring and low back strain with minimal activity',
+        'Increased disc herniation risk with bending and lifting',
+        'Hip and sacroiliac dysfunction from hamstring-driven pelvic pull',
+        'Reduced athletic performance and occupational function',
+        'Fascial adhesions progressing to permanent tissue fibrosis',
+      ]
+    },
+    's-cervical': {
+      label: 'Clinical Significance — Restricted Cervical ROM',
+      causes: [
+        'Cervical vertebral subluxation limiting segmental motion',
+        'Disc degeneration reducing intervertebral space and mobility',
+        'Muscle guarding and hypertonicity from chronic neurological stress',
+        'Facet joint adhesion from prolonged postural dysfunction',
+      ],
+      consequences: [
+        'Accelerated cervical disc degeneration and bone spur formation',
+        'Progressive cervicogenic headaches and upper extremity radiculopathy',
+        'Increased risk of cervical myelopathy as stenosis worsens',
+        'Loss of safe driving ability (inability to check blind spots)',
+        'Increased fall risk from reduced vestibulo-ocular reflex capacity',
+        'Permanent range of motion loss if joint adhesions calcify',
+      ]
+    },
+    's-shoulder': {
+      label: 'Clinical Significance — Shoulder Mobility Restriction',
+      causes: [
+        'Rotator cuff imbalance from upper cross syndrome pattern',
+        'Glenohumeral capsular tightness from thoracic and cervical dysfunction',
+        'Scapular dyskinesis from poor thoracic mobility',
+      ],
+      consequences: [
+        'Rotator cuff tears from impingement under continued loading',
+        'Adhesive capsulitis (frozen shoulder) if immobility persists',
+        'Chronic subacromial bursitis and bicipital tendinopathy',
+        'Cervical and thoracic compensation loading with overhead activity',
+        'Permanent loss of overhead function without intervention',
+      ]
+    },
+    's-faber': {
+      label: 'Clinical Significance — Hip / SI Joint Dysfunction',
+      causes: [
+        'SI ligament sprain from pelvic instability or cumulative trauma',
+        'Hip capsular restriction from prolonged sitting and hip flexor tightness',
+        'Gluteal inhibition shifting load to the lumbar spine',
+      ],
+      consequences: [
+        'Chronic low back pain from SI joint dysfunction and lumbar overload',
+        'Sciatic nerve irritation from piriformis syndrome and pelvic imbalance',
+        'Hip labral tears and early-onset hip osteoarthritis',
+        'Knee and ankle pathology from altered gait mechanics',
+        'Pelvic floor dysfunction in female patients',
+      ]
+    },
+    's-sst': {
+      label: 'Clinical Significance — SI Ligament Sprain',
+      causes: [
+        'The SI ligament is the largest, most weight-bearing ligament in the body',
+        'Commonly missed by all types of clinicians — misdiagnosed as disc or lumbar pathology',
+        'Can cause carpal tunnel, shoulder dysfunction, plantar fasciitis, and brain symptoms',
+      ],
+      consequences: [
+        'Chronic low back, hip, and buttock pain unresponsive to standard treatment',
+        'Persistent pelvic instability worsening with each pregnancy or fall',
+        'Foot and ankle pathology from altered ground contact mechanics',
+        'Shoulder and upper extremity symptoms from neurological cascade',
+        'Progressive pelvic floor weakness and incontinence',
+      ]
+    },
+    's-palp': {
+      label: 'Clinical Significance — Vertebral Subluxation & Soft Tissue',
+      causes: [
+        'Vertebral subluxation creates neurological interference at the spinal cord and nerve root level',
+        'Chronic muscle guarding leads to fibrosis, trigger points, and reduced blood flow',
+        'Fixated spinal segments accelerate disc degeneration due to reduced disc nutrition',
+        'Apparent short leg indicates pelvic distortion affecting the entire kinetic chain',
+      ],
+      consequences: [
+        'Nerve interference compromising organ function, immune response, and healing',
+        'Progressive disc degeneration leading to herniation, stenosis, and myelopathy',
+        'Chronic pain syndromes as fibrotic tissue becomes a permanent pain generator',
+        'Accelerated spinal aging — subluxation patients show earlier radiographic degeneration',
+        'Systemic health consequences as autonomic nerve interference affects organ systems',
+      ]
+    },
+    's-ortho': {
+      label: 'Clinical Significance — Neurological & Orthopedic Findings',
+      causes: [
+        'Positive SLR indicates disc herniation or nerve root compression requiring urgent attention',
+        'Diminished reflexes signal nerve conduction compromise that worsens without decompression',
+        'Positive provocative tests confirm structural compromise at specific spinal levels',
+      ],
+      consequences: [
+        'Untreated disc herniation can progress to permanent nerve damage and muscle atrophy',
+        'Loss of reflex indicates motor neuron compromise — may not recover fully if delayed',
+        'Spinal stenosis and myelopathy are progressive and potentially surgical if not managed',
+        'Chronic radiculopathy with prolonged nerve compression leads to irreversible axonal loss',
+      ]
+    },
+  };
+
+  // ── BUILD CONSEQUENCE PANELS ──
+  function buildConsequencePanels() {
+    Object.entries(CONSEQUENCES).forEach(([sectionId, data]) => {
+      const section = document.getElementById(sectionId);
+      if (!section) return;
+      const body = section.querySelector('.test-body');
+      if (!body) return;
+
+      const panel = document.createElement('div');
+      panel.className = 'consequences-panel';
+      panel.innerHTML = `
+        <div class="consequences-toggle" onclick="this.parentElement.classList.toggle('open')">
+          <span style="font-size:14px;">⚠</span>
+          <span class="consequences-toggle-label">${data.label}</span>
+          <span class="consequences-toggle-icon">▾</span>
+        </div>
+        <div class="consequences-body">
+          <div class="consequences-grid">
+            <div>
+              <div class="consequences-col-title causes">What This Finding Causes</div>
+              <ul class="consequences-list">
+                ${data.causes.map(c => `<li>${c}</li>`).join('')}
+              </ul>
+            </div>
+            <div>
+              <div class="consequences-col-title consequences">Consequences of Non-Treatment</div>
+              <ul class="consequences-list red">
+                ${data.consequences.map(c => `<li>${c}</li>`).join('')}
+              </ul>
+            </div>
+          </div>
+        </div>
+      `;
+      body.appendChild(panel);
+    });
+  }
+
+  // ── MUSCLE TABLE ROWS ──
+  const muscleRegions = [
+    { id: 'musc-cerv-r',  label: 'Cervical',         side: 'Right' },
+    { id: 'musc-cerv-l',  label: 'Cervical',         side: 'Left'  },
+    { id: 'musc-trap-r',  label: 'Trapezius/Levator',side: 'Right' },
+    { id: 'musc-trap-l',  label: 'Trapezius/Levator',side: 'Left'  },
+    { id: 'musc-thor-r',  label: 'Thoracic Para.',   side: 'Right' },
+    { id: 'musc-thor-l',  label: 'Thoracic Para.',   side: 'Left'  },
+    { id: 'musc-lumb-r',  label: 'Lumbar Para.',     side: 'Right' },
+    { id: 'musc-lumb-l',  label: 'Lumbar Para.',     side: 'Left'  },
+    { id: 'musc-glut-r',  label: 'Gluteal/Pirif.',   side: 'Right' },
+    { id: 'musc-glut-l',  label: 'Gluteal/Pirif.',   side: 'Left'  },
+    { id: 'musc-il-r',    label: 'Iliotibial Band',  side: 'Right' },
+    { id: 'musc-il-l',    label: 'Iliotibial Band',  side: 'Left'  },
+    { id: 'musc-ham-r',   label: 'Hamstrings',       side: 'Right' },
+    { id: 'musc-ham-l',   label: 'Hamstrings',       side: 'Left'  },
+    { id: 'musc-pect-r',  label: 'Pectorals',        side: 'Right' },
+    { id: 'musc-pect-l',  label: 'Pectorals',        side: 'Left'  },
+  ];
+
+  const muscleQualities = ['Taut','Tender','Fibrotic','Edematous','Spasm','Atrophy'];
+
+  function buildMuscleTable() {
+    const tbody = document.getElementById('muscle-table-body');
+    muscleRegions.forEach(r => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="col-label" style="font-size:12px;">${r.label}</td>
+        <td style="font-size:12px;color:var(--muted);font-weight:500;">${r.side}</td>
+        ${muscleQualities.map(q => `
+          <td style="text-align:center;background:${r.side==='Right'?'#FDFBF3':'#F6FBFF'};">
+            <input type="checkbox" id="${r.id}-${q.toLowerCase()}" style="accent-color:var(--blue);width:15px;height:15px;">
+          </td>`).join('')}
+        <td><input type="text" id="${r.id}-note" placeholder="note" style="width:100%;font-size:12px;padding:4px 6px;border:1px solid var(--border);border-radius:4px;background:var(--input-bg);"></td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+  buildMuscleTable();
+
+  // ── HELPERS ──
+  function val(id) {
+    const el = document.getElementById(id);
+    return el ? el.value.trim() : '';
+  }
+  function radio(name) {
+    const el = document.querySelector(`input[name="${name}"]:checked`);
+    return el ? el.value : '';
+  }
+  function checks(name) {
+    return [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(e => e.parentElement.textContent.trim());
+  }
+  function checked(id) {
+    const el = document.getElementById(id);
+    return el ? el.checked : false;
+  }
+
+  function getMuscleFindings() {
+    const findings = [];
+    muscleRegions.forEach(r => {
+      const found = muscleQualities.filter(q => checked(`${r.id}-${q.toLowerCase()}`));
+      const note = val(`${r.id}-note`);
+      if (found.length > 0 || note) {
+        let str = `${r.label} (${r.side}): ${found.join(', ')}`;
+        if (note) str += ` — ${note}`;
+        findings.push(str);
+      }
+    });
+    return findings;
+  }
+
+  function getCheckedObs(selector) {
+    return [...document.querySelectorAll(`${selector} input[type="checkbox"]:checked`)]
+      .map(e => e.parentElement.textContent.trim());
+  }
+
+  // ── SOAP NARRATIVE GENERATOR ──
+  function generateNarrative() {
+    const ptName     = val('pt-name')   || 'The patient';
+    const ptAge      = val('pt-age');
+    const ptDOB      = val('pt-dob');
+    const ptDate     = val('pt-date');
+    const ptSex      = radio('sex');
+    const ptWeight   = val('pt-weight');
+    const ptHeight   = val('pt-height');
+    const complaint  = val('pt-complaint');
+    const goals      = val('pt-goals');
+    const priorChiro = radio('prior-chiro');
+    const surgFx     = [...document.querySelectorAll('.patient-card input[type="text"]')].find(i => i.placeholder.includes('surgeries') || i.placeholder.includes('Surgeries'))?.value.trim();
+    const meds       = [...document.querySelectorAll('.patient-card input[type="text"]')].find(i => i.placeholder.includes('Medications') || i.placeholder.includes('medications'))?.value.trim();
+    const redFlags   = val('pt-redflags');
+    const vitBP      = val('vit-bp');
+    const vitPulse   = val('vit-pulse');
+    const pulseQ     = radio('pulse-quality');
+    const bpClass    = radio('bp-class');
+
+    const pronoun    = ptSex === 'M' ? 'he' : ptSex === 'F' ? 'she' : 'they';
+    const possessive = ptSex === 'M' ? 'his' : ptSex === 'F' ? 'her' : 'their';
+    const sexStr     = ptSex === 'M' ? 'male' : ptSex === 'F' ? 'female' : '';
+
+    const lines = [];
+
+    // ════════════════════════════════════════
+    // HEADER
+    // ════════════════════════════════════════
+    lines.push(`SEAY WELLNESS — CHIROPRACTIC & FUNCTIONAL MEDICINE`);
+    lines.push(`First Visit Examination Report`);
+    lines.push(`${'─'.repeat(60)}`);
+    lines.push(`Patient: ${ptName}${ptDOB ? '   DOB: ' + ptDOB : ''}${ptDate ? '   Date of Service: ' + ptDate : ''}`);
+    lines.push(`Provider: Dr. Adam Seay, DC`);
+    lines.push(`${'─'.repeat(60)}`);
+    lines.push(``);
+
+    // ════════════════════════════════════════
+    // S — SUBJECTIVE
+    // ════════════════════════════════════════
+    lines.push(`S — SUBJECTIVE`);
+    lines.push(`${'─'.repeat(40)}`);
+
+    // Chief Complaint / History of Present Illness
+    lines.push(`Chief Complaint / History of Present Illness:`);
+    let hpi = `${ptName}`;
+    if (ptAge) hpi += `, a ${ptAge}-year-old`;
+    if (sexStr) hpi += ` ${sexStr}`;
+    if (ptHeight || ptWeight) hpi += ` (${[ptHeight ? ptHeight : '', ptWeight ? ptWeight + ' lbs' : ''].filter(Boolean).join(', ')})`;
+    hpi += `, presented to Seay Wellness`;
+    if (ptDate) hpi += ` on ${ptDate}`;
+    hpi += complaint ? ` reporting ${complaint}.` : `.`;
+    lines.push(hpi);
+    if (goals) lines.push(`${ptName} states ${possessive} health goal as: "${goals}"`);
+    lines.push(``);
+
+    // Health History
+    lines.push(`Health History:`);
+    const hhParts = [];
+    if (priorChiro === 'Y') hhParts.push(`prior chiropractic care: yes`);
+    else if (priorChiro === 'N') hhParts.push(`prior chiropractic care: none reported`);
+    if (surgFx) hhParts.push(`surgical/fracture history: ${surgFx}`);
+    if (meds) hhParts.push(`current medications: ${meds}`);
+    if (hhParts.length) lines.push(hhParts.map(p => `  • ${p}`).join('\n'));
+    else lines.push(`  • No significant health history reported at this time.`);
+    if (redFlags) lines.push(`  Red flags / contraindications noted: ${redFlags}`);
+    lines.push(``);
+
+    // ════════════════════════════════════════
+    // O — OBJECTIVE
+    // ════════════════════════════════════════
+    lines.push(`O — OBJECTIVE`);
+    lines.push(`${'─'.repeat(40)}`);
+
+    // Vitals
+    const vitParts = [];
+    if (ptWeight) vitParts.push(`Weight: ${ptWeight} lbs`);
+    if (ptHeight) vitParts.push(`Height: ${ptHeight}`);
+    if (vitBP) vitParts.push(`Blood Pressure: ${vitBP}${bpClass ? ' (' + bpClass + ')' : ''}`);
+    if (vitPulse) vitParts.push(`Pulse: ${vitPulse} bpm${pulseQ ? ', ' + pulseQ : ''}`);
+    if (vitParts.length) {
+      lines.push(`Vitals:`);
+      lines.push(`  ${vitParts.join('   |   ')}`);
+      lines.push(``);
+    }
+
+    // Postural Observation
+    const headPos       = radio('head');
+    const shoulderLevel = radio('shoulder-level');
+    const shoulderSag   = radio('shoulder-sag');
+    const hipLevel      = radio('hip-level');
+    const lumbar        = radio('lumbar');
+    const kneeChecks    = getCheckedObs('#s-posture .test-body');
+    const posturalFinds = [];
+    if (headPos && headPos !== 'WNL') posturalFinds.push(headPos.replace('R-Lateral','right lateral head tilt').replace('L-Lateral','left lateral head tilt').replace('AHC','anterior head carriage'));
+    if (shoulderLevel && shoulderLevel !== 'Even') posturalFinds.push(`${shoulderLevel.replace('R-high','right').replace('L-high','left')} shoulder elevation`);
+    if (shoulderSag && shoulderSag !== 'Normal') posturalFinds.push(shoulderSag.toLowerCase());
+    if (hipLevel && hipLevel !== 'Even') posturalFinds.push(`${hipLevel.replace('R-high','right').replace('L-high','left')} high hip`);
+    if (lumbar && lumbar !== 'Normal') posturalFinds.push(`${lumbar.toLowerCase()} lumbar curve`);
+    if (kneeChecks.length) posturalFinds.push(...kneeChecks.map(s => s.toLowerCase()));
+    lines.push(`Postural Observation:`);
+    lines.push(posturalFinds.length
+      ? `  ${posturalFinds.join('; ')}.`
+      : `  Within normal limits.`);
+    lines.push(``);
+
+    // FIT Assessment
+    lines.push(`Functional Integration Testing (FIT Level 1):`);
+
+    // Testability
+    const test1 = radio('test1'), test2 = radio('test2');
+    if (test1 || test2) {
+      const tp = [];
+      if (test1 === 'NeedCorrection') tp.push('polarity point required correction');
+      else if (test1 === 'OK') tp.push('polarity point clear');
+      if (test2 === 'NeedCorrection') tp.push('K-27 switching required correction');
+      else if (test2 === 'OK') tp.push('K-27 switching clear');
+      lines.push(`  Testability & Switching: ${tp.join('; ')}.`);
+    }
+
+    // Bilateral Scales
+    const scaleInputs = [...document.querySelectorAll('#s-scales .test-body input[type="text"]')];
+    const sRpre = scaleInputs[0]?.value.trim(), sLpre = scaleInputs[1]?.value.trim();
+    const sRpost = scaleInputs[2]?.value.trim(), sLpost = scaleInputs[3]?.value.trim();
+    if (sRpre || sLpre) {
+      let sc = `  Bilateral Weight-Bearing: R ${sRpre||'—'} lbs / L ${sLpre||'—'} lbs (pre-adjustment)`;
+      if (sRpost || sLpost) sc += `; R ${sRpost||'—'} lbs / L ${sLpost||'—'} lbs (post-adjustment)`;
+      sc += '.';
+      lines.push(sc);
+    }
+
+    // Cortex
+    const hum = radio('hum'), count = radio('count');
+    if (hum || count) {
+      const bp2 = [];
+      if (hum === 'Weak') bp2.push('right cortex insufficiency (hum)');
+      else if (hum === 'Strong') bp2.push('right cortex intact');
+      if (count === 'Weak') bp2.push('left cortex insufficiency (count)');
+      else if (count === 'Strong') bp2.push('left cortex intact');
+      lines.push(`  Brain / Cortex: ${bp2.join('; ')}.`);
+    }
+
+    // Cerebellum
+    const rombergInputs = [...document.querySelectorAll('#s-cerebellum .test-body input[type="text"]')];
+    const rStdRpre = rombergInputs[0]?.value.trim(), rStdLpre = rombergInputs[1]?.value.trim();
+    const rStdRpost = rombergInputs[2]?.value.trim(), rStdLpost = rombergInputs[3]?.value.trim();
+    if (rStdRpre || rStdLpre) {
+      let rom = `  Cerebellar Balance (Romberg): sway R ${rStdRpre||'—'} / L ${rStdLpre||'—'} (pre)`;
+      if (rStdRpost || rStdLpost) rom += `; R ${rStdRpost||'—'} / L ${rStdLpost||'—'} (post)`;
+      rom += '.';
+      lines.push(rom);
+    }
+
+    // Grip
+    const gripInputs = [...document.querySelectorAll('#s-grip .test-body tbody input[type="text"]')];
+    const gR1pre = gripInputs[0]?.value.trim(), gL1pre = gripInputs[1]?.value.trim();
+    const gR1post = gripInputs[2]?.value.trim(), gL1post = gripInputs[3]?.value.trim();
+    const domHand = radio('dom');
+    if (gR1pre || gL1pre) {
+      let grip = `  JAMAR Grip Strength${domHand ? ` (dominant: ${domHand === 'R' ? 'right' : 'left'})` : ''}: R ${gR1pre||'—'} lbs / L ${gL1pre||'—'} lbs (pre-adjustment)`;
+      if (gR1post || gL1post) grip += `; R ${gR1post||'—'} lbs / L ${gL1post||'—'} lbs (post-adjustment)`;
+      grip += '.';
+      lines.push(grip);
+    }
+
+    // Band Extensions
+    const bandNotes = [...document.querySelectorAll('#s-bands .findings-row textarea')].map(t => t.value.trim()).filter(Boolean);
+    if (bandNotes.length) lines.push(`  Band Extensions: ${bandNotes[0]}`);
+
+    // Standing Stress Test
+    const sstR = radio('sst-r'), sstL = radio('sst-l'), sstBelt = radio('sst-belt');
+    if (sstR || sstL) {
+      const sp2 = [];
+      if (sstR === 'Weak') sp2.push('positive right SI');
+      else if (sstR === 'Strong') sp2.push('right SI negative');
+      if (sstL === 'Weak') sp2.push('positive left SI');
+      else if (sstL === 'Strong') sp2.push('left SI negative');
+      let sst = `  Standing Stress Test: ${sp2.join('; ')}`;
+      if (sstBelt === 'Strengthens') sst += '; sacrobelt confirmed SI ligament sprain';
+      lines.push(sst + '.');
+    }
+    lines.push(``);
+
+    // MoveWell3
+    lines.push(`MoveWell3 Movement Screen (Level 1):`);
+
+    // Squat
+    const squatDys = getCheckedObs('#s-squat .observation-grid');
+    const squatResult = radio('squat-result');
+    if (squatDys.length || squatResult) {
+      let sq = `  Overhead Deep Squat: ${squatResult ? squatResult.toLowerCase() : ''}`;
+      if (squatDys.length) sq += ` — compensations: ${squatDys.join(', ')}`;
+      lines.push(sq + '.');
+    }
+
+    // Toe Touch
+    const ttDist = [...document.querySelectorAll('#s-toetouch .test-body input[type="text"]')][0]?.value.trim();
+    const ttType = radio('tt-type'), ttCurve = radio('tt-curve'), oe = radio('oe');
+    const ttParts = [];
+    if (ttDist) ttParts.push(`distance from floor: ${ttDist}`);
+    if (ttType) ttParts.push(`restriction: ${ttType.toLowerCase()}`);
+    if (ttCurve) ttParts.push(`spinal curve: ${ttCurve.toLowerCase()}`);
+    if (oe && oe !== 'Functional') ttParts.push(`overhead extension limited${oe === 'Pain' ? ' with pain' : ''}`);
+    if (ttParts.length) lines.push(`  Toe Touch / Overhead Extension: ${ttParts.join('; ')}.`);
+
+    // Cervical ROM
+    const romInputs2 = [...document.querySelectorAll('#s-cervical .rom-cell input')];
+    const romLabels = ['Flex','Ext','R Rot','L Rot','R Lat Flex','L Lat Flex'];
+    const romNormals = [50,60,80,80,45,45];
+    const romParts = [];
+    romInputs2.forEach((inp, i) => {
+      const v = inp.value.trim();
+      if (v) {
+        const pct = Math.round((parseInt(v)/romNormals[i])*100);
+        romParts.push(`${romLabels[i]} ${v}°${pct < 100 ? ' ('+pct+'%)' : ''}`);
+      }
+    });
+    if (romParts.length) lines.push(`  Cervical ROM: ${romParts.join('  |  ')}.`);
+
+    // Shoulder Touch
+    const shRT = radio('sh-rt'), shRB = radio('sh-rb'), shLT = radio('sh-lt'), shLB = radio('sh-lb');
+    const shParts = [];
+    if (shRT) shParts.push(`R overhead: ${shRT.toLowerCase()}`);
+    if (shRB) shParts.push(`R behind: ${shRB.toLowerCase()}`);
+    if (shLT) shParts.push(`L overhead: ${shLT.toLowerCase()}`);
+    if (shLB) shParts.push(`L behind: ${shLB.toLowerCase()}`);
+    if (shParts.length) lines.push(`  Shoulder Touch: ${shParts.join('; ')}.`);
+
+    // FABER / Glute Bridge
+    const faberR = radio('faber-r'), faberL = radio('faber-l');
+    const gbR = radio('gb-r'), gbL = radio('gb-l');
+    const hipParts = [];
+    if (faberR) hipParts.push(`FABER R: ${faberR.toLowerCase()}`);
+    if (faberL) hipParts.push(`FABER L: ${faberL.toLowerCase()}`);
+    if (gbR && gbR !== 'Functional') hipParts.push(`glute bridge R: ${gbR.toLowerCase()}`);
+    if (gbL && gbL !== 'Functional') hipParts.push(`glute bridge L: ${gbL.toLowerCase()}`);
+    if (hipParts.length) lines.push(`  FABER / Glute Bridge: ${hipParts.join('; ')}.`);
+    lines.push(``);
+
+    // Chiropractic Examination
+    lines.push(`Chiropractic Examination:`);
+
+    // Apparent Short Leg
+    const shortLeg = radio('short-leg'), shortLegType = radio('short-leg-type');
+    const shortLegDiff = val('short-leg-diff'), shortLegPos = radio('short-leg-pos');
+    if (shortLeg) {
+      let sl = `  Apparent Leg Length${shortLegPos ? ' (' + shortLegPos.toLowerCase() + ')' : ''}: `;
+      sl += shortLeg === 'Even' ? 'even bilaterally' : `${shortLeg.toLowerCase()} short`;
+      if (shortLegDiff && shortLeg !== 'Even') sl += `, est. ${shortLegDiff}`;
+      if (shortLegType) sl += ` — ${shortLegType.toLowerCase()}`;
+      lines.push(sl + '.');
+    }
+
+    // Subluxations
+    const subC = val('sub-cerv'), subT = val('sub-thor'), subL2 = val('sub-lumb');
+    const subParts = [];
+    if (subC) subParts.push(`Cervical: ${subC}`);
+    if (subT) subParts.push(`Thoracic: ${subT}`);
+    if (subL2) subParts.push(`Lumbar/Pelvic: ${subL2}`);
+    if (subParts.length) lines.push(`  Vertebral Subluxations: ${subParts.join('  |  ')}.`);
+
+    // Muscle Findings
+    const muscleFindings = getMuscleFindings();
+    if (muscleFindings.length) {
+      lines.push(`  Soft Tissue Findings:`);
+      muscleFindings.forEach(f => lines.push(`    • ${f}`));
+    }
+
+    // Motion Palpation
+    const motionPalp = val('motion-palp');
+    if (motionPalp) lines.push(`  Motion Palpation: ${motionPalp}.`);
+
+    // SLR
+    const slrR = radio('slr-r'), slrL = radio('slr-l');
+    const slrRdeg = [...document.querySelectorAll('#s-ortho .test-body input[type="text"]')][2]?.value.trim();
+    const slrLdeg = [...document.querySelectorAll('#s-ortho .test-body input[type="text"]')][3]?.value.trim();
+    if (slrR || slrL) {
+      const sp3 = [];
+      if (slrR) sp3.push(`R ${slrR.toLowerCase()}${slrRdeg ? ' at ' + slrRdeg + '°' : ''}`);
+      if (slrL) sp3.push(`L ${slrL.toLowerCase()}${slrLdeg ? ' at ' + slrLdeg + '°' : ''}`);
+      lines.push(`  Straight Leg Raise: ${sp3.join('; ')}.`);
+    }
+
+    // Orthopedic
+    const otNames = ['ot1','ot2','ot3'];
+    const otInputs = [...document.querySelectorAll('#s-ortho .test-body .form-grid.three input[type="text"]')];
+    const otParts = [];
+    otNames.forEach((name, i) => {
+      const testName = otInputs[i*2]?.value.trim();
+      const result = radio(name);
+      const noteEl = otInputs[i*2+1]?.value.trim();
+      if (testName && result) otParts.push(`${testName}: ${result.toLowerCase()}${noteEl ? ' (' + noteEl + ')' : ''}`);
+    });
+    if (otParts.length) lines.push(`  Orthopedic Tests: ${otParts.join('; ')}.`);
+
+    // DTR
+    const dtrEl = [...document.querySelectorAll('#s-ortho .test-body .form-grid textarea')][0]?.value.trim();
+    if (dtrEl) lines.push(`  Deep Tendon Reflexes: ${dtrEl}.`);
+    lines.push(``);
+
+    // ════════════════════════════════════════
+    // A — ASSESSMENT
+    // ════════════════════════════════════════
+    lines.push(`A — ASSESSMENT`);
+    lines.push(`${'─'.repeat(40)}`);
+
+    const impression = [...document.querySelectorAll('.patient-card textarea')].find(t => t.placeholder.includes('Subluxation levels'))?.value.trim();
+    const icd1 = [...document.querySelectorAll('.patient-card input[type="text"]')].find(i => i.placeholder.includes('M54') || i.placeholder.includes('ICD'))?.value.trim();
+    const icd2 = [...document.querySelectorAll('.patient-card input[type="text"]')].filter(i => i.placeholder === 'ICD-10 code')[0]?.value.trim();
+    const icd3 = [...document.querySelectorAll('.patient-card input[type="text"]')].filter(i => i.placeholder === 'ICD-10 code')[1]?.value.trim();
+
+    if (impression) lines.push(`Clinical Impression:\n  ${impression}`);
+    else lines.push(`Clinical Impression:\n  [Enter clinical impression]`);
+
+    const dxParts = [icd1, icd2, icd3].filter(Boolean);
+    if (dxParts.length) lines.push(`\nDiagnosis Codes: ${dxParts.join('  |  ')}`);
+
+    // ── CLINICAL SIGNIFICANCE / CONSEQUENCES (based on positive findings)
+    lines.push(``);
+    lines.push(`Clinical Significance of Findings / Consequences of Non-Treatment:`);
+
+    const significanceSections = [];
+
+    // Posture
+    const headPos2 = radio('head'), shoulderLevel2 = radio('shoulder-level'), hipLevel2 = radio('hip-level'), lumbar2 = radio('lumbar');
+    if ((headPos2 && headPos2 !== 'WNL') || (shoulderLevel2 && shoulderLevel2 !== 'Even') || (hipLevel2 && hipLevel2 !== 'Even') || (lumbar2 && lumbar2 !== 'Normal')) {
+      significanceSections.push({ title: 'Postural Deviations', items: CONSEQUENCES['s-posture'].consequences });
+    }
+    // Bilateral scales
+    const sc0 = [...document.querySelectorAll('#s-scales .test-body input[type="text"]')][0]?.value.trim();
+    const sc1 = [...document.querySelectorAll('#s-scales .test-body input[type="text"]')][1]?.value.trim();
+    if (sc0 && sc1 && sc0 !== sc1) {
+      significanceSections.push({ title: 'Bilateral Weight Asymmetry', items: CONSEQUENCES['s-scales'].consequences });
+    }
+    // Cortex
+    const hum2 = radio('hum'), count2 = radio('count');
+    if (hum2 === 'Weak' || count2 === 'Weak') {
+      significanceSections.push({ title: 'Cortical Dysfunction', items: CONSEQUENCES['s-brain'].consequences });
+    }
+    // Cerebellum
+    const romInp0 = [...document.querySelectorAll('#s-cerebellum .test-body input[type="text"]')][0]?.value.trim();
+    if (romInp0) {
+      significanceSections.push({ title: 'Balance / Cerebellar Dysfunction', items: CONSEQUENCES['s-cerebellum'].consequences });
+    }
+    // Grip
+    const gripInp0 = [...document.querySelectorAll('#s-grip .test-body tbody input[type="text"]')][0]?.value.trim();
+    if (gripInp0) {
+      significanceSections.push({ title: 'Grip Strength Deficits', items: CONSEQUENCES['s-grip'].consequences });
+    }
+    // Cervical ROM
+    const anyRomReduced = [...document.querySelectorAll('#s-cervical .rom-cell input')].some(inp => {
+      const v = parseInt(inp.value.trim()); return v > 0 && v < 100;
+    });
+    if (anyRomReduced) {
+      significanceSections.push({ title: 'Restricted Cervical ROM', items: CONSEQUENCES['s-cervical'].consequences });
+    }
+    // Squat
+    const squatDys2 = getCheckedObs('#s-squat .observation-grid');
+    if (squatDys2.length) {
+      significanceSections.push({ title: 'Kinetic Chain / Movement Dysfunction', items: CONSEQUENCES['s-squat'].consequences });
+    }
+    // SST
+    const sstR2 = radio('sst-r'), sstL2 = radio('sst-l');
+    if (sstR2 === 'Weak' || sstL2 === 'Weak') {
+      significanceSections.push({ title: 'SI Ligament Sprain', items: CONSEQUENCES['s-sst'].consequences });
+    }
+    // Subluxation / palpation
+    const subC2 = val('sub-cerv'), subT2 = val('sub-thor'), subL3 = val('sub-lumb');
+    if (subC2 || subT2 || subL3) {
+      significanceSections.push({ title: 'Vertebral Subluxation Complex', items: CONSEQUENCES['s-palp'].consequences });
+    }
+    // Ortho / SLR
+    const slrR2 = radio('slr-r'), slrL2 = radio('slr-l');
+    const ot1pos = radio('ot1'), ot2pos = radio('ot2'), ot3pos = radio('ot3');
+    if (slrR2 === 'Pos' || slrL2 === 'Pos' || ot1pos === 'Pos' || ot2pos === 'Pos' || ot3pos === 'Pos') {
+      significanceSections.push({ title: 'Neurological / Orthopedic Compromise', items: CONSEQUENCES['s-ortho'].consequences });
+    }
+
+    if (significanceSections.length > 0) {
+      significanceSections.forEach(sec => {
+        lines.push(`\n  ${sec.title.toUpperCase()}:`);
+        sec.items.forEach(item => lines.push(`    • ${item}`));
+      });
+    } else {
+      lines.push(`  No positive findings requiring consequence documentation at this time.`);
+    }
+    lines.push(``);
+
+    // ════════════════════════════════════════
+    // P — PLAN
+    // ════════════════════════════════════════
+    lines.push(`P — PLAN`);
+    lines.push(`${'─'.repeat(40)}`);
+
+    const planSelected = document.querySelector('.plan-card.selected .plan-card-title')?.textContent.trim();
+    const freq = [...document.querySelectorAll('.patient-card input[type="text"]')].find(i => i.placeholder.includes('3x/wk'))?.value.trim();
+    const dur  = [...document.querySelectorAll('.patient-card input[type="text"]')].find(i => i.placeholder.includes('8 weeks'))?.value.trim();
+    const reexam = [...document.querySelectorAll('.patient-card input[type="text"]')].find(i => i.placeholder.includes('Date') && i.placeholder.length < 10)?.value.trim();
+    const planAccepted = radio('plan-accepted');
+    const provNotes = [...document.querySelectorAll('.patient-card textarea')].find(t => t.placeholder.includes('Patient response'))?.value.trim();
+
+    if (planSelected) lines.push(`Care Plan Type: ${planSelected}`);
+    if (freq) lines.push(`Frequency: ${freq}`);
+    if (dur) lines.push(`Duration: ${dur}`);
+    if (reexam) lines.push(`Re-Examination Scheduled: ${reexam}`);
+    if (planAccepted) {
+      const acceptMap = { 'Y': 'Accepted — scheduled', 'ThinkingAboutIt': 'Pending — patient considering', 'N': 'Declined' };
+      lines.push(`Plan Status: ${acceptMap[planAccepted] || planAccepted}`);
+    }
+    lines.push(``);
+    lines.push(`Patient Education:`);
+    lines.push(`  Patient was educated on the relationship between vertebral subluxation, neurological interference, and ${possessive} presenting symptoms. The significance of ${possessive} examination findings, including pre- and post-adjustment functional testing results, was reviewed and discussed.`);
+    if (provNotes) lines.push(`\nProvider Notes:\n  ${provNotes}`);
+    lines.push(``);
+    lines.push(`${'─'.repeat(60)}`);
+    lines.push(`Signature: ________________________________   Date: ____________`);
+    lines.push(`Dr. Adam Seay, DC  |  Seay Wellness  |  Garner, NC`);
+
+    document.getElementById('narrative-text').value = lines.join('\n');
+    document.getElementById('narrative-output').style.display = 'block';
+    document.getElementById('narrative-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function copyNarrative() {
+    const text = document.getElementById('narrative-text');
+    text.select();
+    document.execCommand('copy');
+    alert('Narrative copied to clipboard.');
+  }
+
+  // ── PRINT FUNCTIONS ──
+  function printHandout() {
+    // Patient handout: clean filled-data-only print, consequences shown if open, no narrative
+    document.body.classList.remove('print-provider');
+    document.body.classList.add('print-handout');
+    setTimeout(() => {
+      window.print();
+      setTimeout(() => document.body.classList.remove('print-handout'), 500);
+    }, 150);
+  }
+
+  function printProviderNotes() {
+    // Provider notes: full SOAP narrative, no clinical significance panels
+    document.body.classList.remove('print-handout');
+    document.body.classList.add('print-provider');
+    // Auto-generate narrative if not yet done
+    if (!document.getElementById('narrative-text').value.trim()) {
+      generateNarrative();
+    }
+    document.getElementById('narrative-output').style.display = 'block';
+    setTimeout(() => {
+      window.print();
+      setTimeout(() => document.body.classList.remove('print-provider'), 500);
+    }, 300);
+  }
+
+  function toggleAllConsequences() {
+    const panels = document.querySelectorAll('.consequences-panel');
+    const anyOpen = [...panels].some(p => p.classList.contains('open'));
+    panels.forEach(p => {
+      if (anyOpen) p.classList.remove('open');
+      else p.classList.add('open');
+    });
+    const btn = document.getElementById('conseq-toggle-btn');
+    btn.textContent = anyOpen ? '▶ Show Clinical Significance' : '▼ Hide Clinical Significance';
+  }
+
+  // ── SECTION TOGGLE ──
+  function toggleSection(id) {
+    const el = document.getElementById(id);
+    el.classList.toggle('collapsed');
+  }
+
+  function expandAll() {
+    document.querySelectorAll('.test-section').forEach(s => s.classList.remove('collapsed'));
+  }
+
+  function collapseAll() {
+    document.querySelectorAll('.test-section').forEach(s => s.classList.add('collapsed'));
+  }
+
+  // ── CARE PLAN ──
+  function selectPlan(el, type) {
+    document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  // ── LIVE FOOTER ──
+  document.getElementById('pt-name').addEventListener('input', function() {
+    document.getElementById('footer-name').textContent = this.value || '—';
+  });
+  document.getElementById('pt-date').addEventListener('input', function() {
+    document.getElementById('footer-date').textContent = this.value || '—';
+  });
+
+  // ── CLEAR ──
+  function clearForm() {
+    if (!confirm('Clear all entered data? This cannot be undone.')) return;
+    document.querySelectorAll('input[type="text"], input[type="number"], textarea').forEach(el => el.value = '');
+    document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(el => el.checked = false);
+    document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('selected'));
+    document.getElementById('footer-name').textContent = '—';
+    document.getElementById('footer-date').textContent = '—';
+    document.getElementById('narrative-output').style.display = 'none';
+  }
+
+  expandAll();
+  buildConsequencePanels();
+</script>
+</body>
+</html>
